@@ -1,6 +1,6 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
+author: "Owen Ebose"
 description: "My final project"
 output:
   distill::distill_article:
@@ -11,4 +11,4 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+I am interested in exploring the impact of British Commonwealth membership on political attitude, nationalism, and democratic participation. Do citizens of countries that remove the Monarch as their head of state develop a greater sense of national pride and therefore a greater desire to participate politically? I can measure this using voter turnout rates and surveys of populations that have experienced such a transition. 
