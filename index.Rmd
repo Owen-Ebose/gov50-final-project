@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Owen Ebose"
-description: "My final project"
+description: "Owen's final project, tentatively on the relationship between British Commonwealth membership and political attitudes/participation"
 output:
   distill::distill_article:
     self_contained: false
