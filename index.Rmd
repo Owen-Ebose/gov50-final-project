@@ -7,23 +7,26 @@ output:
     self_contained: false
 ---
 
-## Project thoughts (now outdated, see proposal below)
-
-I am interested in exploring the impact of British Commonwealth membership on political attitudes, nationalism, and democratic participation. Do citizens of countries that remove the Monarch as their head of state develop a greater sense of national pride and therefore a greater desire to participate politically? I can measure this using voter turnout rates and surveys of populations that have experienced such a transition.
-
-## Milestone 2 (next milestone below)
-
-Does one’s class of work affect their degree of democratic participation? I plan to investigate how work conditions influence the ability or willingness of workers to vote. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed and (2) work less hours. Proximity to politics can inspire or pressure one to participate. A less demanding work schedule allows one the time needed to engage in politics. I expect to find, therefore, that government and non-profit employees and the self-employed participate the most: government and non-profit employees due to their proximity to politics, and the self-employed due to their control over their schedules. In election years, the Current Population Survey conducted by the U.S. Census Bureau asks tens of thousands of Americans whether or not they voted in the most recent national election. The latest edition of the survey, based on the 2022 elections, features 264,707,835 responses. On top of vote status, the survey asks respondents to report their “class” of work, one of six categories: employment by (1) the federal government, (2) a state government, (3) a local government, (4) a private for-profit company, (5) a private non-profit entity, or (6) no one (i.e., self-employed). I can compare the turnout rates of each group in the 2022 national elections to determine which participated the most. In other words, the explanatory variable of interest is “class” of work as defined by the Census Bureau and the outcome variable of interest is whether or not the respondent voted (coded “1” for voted and “2” for not voted in the dataset). If my hypothesis is correct, I will observe that workers of classes 1, 2, 3, and 5 (government and non-profit employees) and 6 (the self-employed) turned out to vote at the highest rates in 2022. Workers of class 4 (for-profit employees), who are by far the largest group in the dataset, will have turned out the least.
-
-Link to the dataset: https://data.census.gov/mdat/#/search?ds=CPSVOTING202211&cv=HEFAMINC,PES1&rv=PEIO1COW&wt=HWHHWGT
+*(Older milestones below)*
 
 ##Milestone 3
 
 ```{r}
 library(tidyverse)
 
-census <- nov22pub_1_ |>
-  select(employment=PEIO1COW, vote=PES1, income_code=HEFAMINC)
+#loading data
+
+#census_raw <- read_csv("nov22pub (1).csv")
+
+#selecting variables 
+
+#census <- census_raw |>
+#  select(employment=PEIO1COW, vote=PES1, income_code=HEFAMINC)
+
+#write.csv(census,"census.csv")
+
+census <- read_csv("census.csv")
+#replacing coded values
 
 census$employment <- census$employment |>
   case_match(1 ~ "fed_gov",
@@ -60,7 +63,9 @@ census$income <- census$income_code |>
              15 ~ "100_to_149.999",
              16 ~ "150_or_more")
 
-turnout_rates <- census |>
+#calculating turnout rates by employment class
+
+employment_turnout <- census |>
   group_by(employment, vote) |>
   summarize(n = n()) |>
   mutate(prop = n / sum(n) *100) |>
@@ -69,18 +74,59 @@ turnout_rates <- census |>
   mutate(prop = round(prop, digits = 2)) |>
   rename(turnout = prop)
 
-turnout_rates
+knitr::kable(employment_turnout)
 
-turnout_rates |>
+#plotting turnout rates by employment class
+
+employment_turnout_plot <- employment_turnout |>
   ggplot(mapping = aes(x = fct_reorder(employment, turnout), y = turnout)) +
   geom_col() +
   coord_flip() +
   labs(
     title = "Impact of Employment Class on Electoral Participation",
-    x = "Employment Class",
+    x = "Employment class",
+    y = "Turnout (%) in 2022 national elections"
+  ) +
+  theme_classic()
+
+employment_turnout_plot
+
+#calculating turnout rates by income group 
+
+income_turnout <- census |>
+  group_by(income, vote) |>
+  summarize(n = n()) |>
+  mutate(prop = n / sum(n) *100) |>
+  filter(vote == "yes") |>
+  select(-vote, -n) |>
+  mutate(prop = round(prop, digits = 2)) |>
+  rename(turnout = prop)
+
+knitr::kable(income_turnout)
+
+#plotting turnout rates by income group
+
+income_turnout_plot <- income_turnout |>
+  ggplot(mapping = aes(x = fct_reorder(income, turnout), y = turnout)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Impact of Household Income on Electoral Participation",
+    x = "Annual household income (in thousands)",
     y = "Turnout (%) in 2022 National Elections"
   ) +
   theme_classic()
 
+income_turnout_plot
+
 ```
 
+## Milestone 2
+
+Does one's class of work affect their degree of democratic participation? I plan to investigate how work conditions influence the ability or willingness of workers to vote. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed and (2) work less hours. Proximity to politics can inspire or pressure one to participate. A less demanding work schedule allows one the time needed to engage in politics. I expect to find, therefore, that government and non-profit employees and the self-employed participate the most: government and non-profit employees due to their proximity to politics, and the self-employed due to their control over their schedules. In election years, the Current Population Survey conducted by the U.S. Census Bureau asks tens of thousands of Americans whether or not they voted in the most recent national election. The latest edition of the survey, based on the 2022 elections, features 264,707,835 responses. On top of vote status, the survey asks respondents to report their "class" of work, one of six categories: employment by (1) the federal government, (2) a state government, (3) a local government, (4) a private for-profit company, (5) a private non-profit entity, or (6) no one (i.e., self-employed). I can compare the turnout rates of each group in the 2022 national elections to determine which participated the most. In other words, the explanatory variable of interest is "class" of work as defined by the Census Bureau and the outcome variable of interest is whether or not the respondent voted (coded "1" for voted and "2" for not voted in the dataset). If my hypothesis is correct, I will observe that workers of classes 1, 2, 3, and 5 (government and non-profit employees) and 6 (the self-employed) turned out to vote at the highest rates in 2022. Workers of class 4 (for-profit employees), who are by far the largest group in the dataset, will have turned out the least.
+
+Link to the dataset: <https://data.census.gov/mdat/#/search?ds=CPSVOTING202211&cv=HEFAMINC,PES1&rv=PEIO1COW&wt=HWHHWGT>
+
+## Project thoughts
+
+I am interested in exploring the impact of British Commonwealth membership on political attitudes, nationalism, and democratic participation. Do citizens of countries that remove the Monarch as their head of state develop a greater sense of national pride and therefore a greater desire to participate politically? I can measure this using voter turnout rates and surveys of populations that have experienced such a transition.
