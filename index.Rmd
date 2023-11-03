@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Owen Ebose"
-description: "Owen's final project, tentatively on the relationship between class of work and democratic participation."
+description: "Owen's final project on the relationship between employment class and democratic participation."
 output:
   distill::distill_article:
     self_contained: false
@@ -9,10 +9,11 @@ output:
 
 *(Older milestones below)*
 
-##Milestone 3
+## Milestone 3
 
 ```{r}
 library(tidyverse)
+library(stringr)
 
 #loading data
 
@@ -21,56 +22,57 @@ library(tidyverse)
 #selecting variables 
 
 #census <- census_raw |>
-#  select(employment=PEIO1COW, vote=PES1, income_code=HEFAMINC)
+  #select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC)
 
 #write.csv(census,"census.csv")
 
 census <- read_csv("census.csv")
+
 #replacing coded values
 
-census$employment <- census$employment |>
-  case_match(1 ~ "fed_gov",
-             2 ~ "state_gov",
-             3 ~ "local_gov", 
-             4 ~ "for_prof",
-             5 ~ "non_prof",
-             6 ~ "self_empl_incorp",
-             7 ~ "self_empl_unincorp",
-             8 ~ "without_pay",
+census$employment_class <- census$employment_class |>
+  case_match(1 ~ "Federal gov't",
+             2 ~ "State gov't",
+             3 ~ "Local gov't", 
+             4 ~ "For profit",
+             5 ~ "Non profit",
+             6 ~ "Self-employed Inc.",
+             7 ~ "Self-employed Non-Inc.",
+             8 ~ "Unpaid",
              .default="other")
 
-census$vote <- census$vote |>
+census$voted <- census$voted |>
   case_match(1 ~ "yes",
              2 ~ "no",
              .default="other")
 
-census$income <- census$income_code |>
+census$household_income <- census$income_code |>
   case_match(-1 ~ "other",
-             1 ~ "less_than_5",
-             2 ~ "5_to_7.499",
-             3 ~ "7.5_to_9.999", 
-             4 ~ "10_to_12.499",
-             5 ~ "12.5_to_14.999",
-             6 ~ "15_to_19.999",
-             7 ~ "20_to_24.999",
-             8 ~ "25_to_29.999",
-             9 ~ "30_to_34.999",
-             10 ~ "35_to_39.999",
-             11 ~ "40_to_49.999",
-             12 ~ "50_to_59.999",
-             13 ~ "60_to_74.999",
-             14 ~ "75_to_99.999",
-             15 ~ "100_to_149.999",
-             16 ~ "150_or_more")
+             1 ~ "less than 5",
+             2 ~ "5 to 7.499",
+             3 ~ "7.5 to 9.999", 
+             4 ~ "10 to 12.499",
+             5 ~ "12.5 to 14.999",
+             6 ~ "15 to 19.999",
+             7 ~ "20 to 24.999",
+             8 ~ "25 to 29.999",
+             9 ~ "30 to 34.999",
+             10 ~ "35 to 39.999",
+             11 ~ "40 to 49.999",
+             12 ~ "50 to 59.999",
+             13 ~ "60 to 74.999",
+             14 ~ "75 to 99.999",
+             15 ~ "100 to 149.999",
+             16 ~ "150 or more")
 
 #calculating turnout rates by employment class
 
 employment_turnout <- census |>
-  group_by(employment, vote) |>
+  group_by(employment_class, voted) |>
   summarize(n = n()) |>
   mutate(prop = n / sum(n) *100) |>
-  filter(vote == "yes") |>
-  select(-vote, -n) |>
+  filter(voted == "yes") |>
+  select(-voted, -n) |>
   mutate(prop = round(prop, digits = 2)) |>
   rename(turnout = prop)
 
@@ -79,26 +81,32 @@ knitr::kable(employment_turnout)
 #plotting turnout rates by employment class
 
 employment_turnout_plot <- employment_turnout |>
-  ggplot(mapping = aes(x = fct_reorder(employment, turnout), y = turnout)) +
+  ggplot(mapping = aes(x = fct_reorder(employment_class, turnout), y = turnout)) +
   geom_col() +
   coord_flip() +
   labs(
     title = "Impact of Employment Class on Electoral Participation",
     x = "Employment class",
-    y = "Turnout (%) in 2022 national elections"
+    y = "Turnout (%) in 2022 national elections",
+    caption = "Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government. (U.S. Census Bureau)"
   ) +
-  theme_classic()
+  theme_classic() +
+  theme(plot.margin = margin(b = 10))
+
+wrapped_caption <- str_wrap("Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government. (U.S. Census Bureau)", width = 112)
+
+employment_turnout_plot <- employment_turnout_plot + labs(caption = wrapped_caption)
 
 employment_turnout_plot
 
 #calculating turnout rates by income group 
 
 income_turnout <- census |>
-  group_by(income, vote) |>
+  group_by(household_income, voted) |>
   summarize(n = n()) |>
   mutate(prop = n / sum(n) *100) |>
-  filter(vote == "yes") |>
-  select(-vote, -n) |>
+  filter(voted == "yes") |>
+  select(-voted, -n) |>
   mutate(prop = round(prop, digits = 2)) |>
   rename(turnout = prop)
 
@@ -107,7 +115,7 @@ knitr::kable(income_turnout)
 #plotting turnout rates by income group
 
 income_turnout_plot <- income_turnout |>
-  ggplot(mapping = aes(x = fct_reorder(income, turnout), y = turnout)) +
+  ggplot(mapping = aes(x = fct_reorder(household_income, turnout), y = turnout)) +
   geom_col() +
   coord_flip() +
   labs(
