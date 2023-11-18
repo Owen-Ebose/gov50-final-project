@@ -34,23 +34,6 @@ library(stringr)
 
 census <- read_csv("census.csv")
 
-
-
-#loading data
-
-#census_raw <- read_csv("nov22pub (1).csv")
-
-#selecting variables 
-
-#census <- census_raw |>
-  #select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC)
-
-#In case data file is too large:
-
-#write.csv(census,"census.csv")
-
-#census <- read_csv("census.csv")
-
 ```
 
 #preparing data
