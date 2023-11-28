@@ -7,17 +7,11 @@ output:
     self_contained: false
 ---
 
-*(Older milestones below)*
-
-## Milestone 3 and 4
-
-**See Analysis section for regression and difference in means code/output.** 
-
-I am interested in studying the effect of one's mode---or "class"---of work on their democratic participation. Respondents to the U.S. Census Bureau's most recent Current Population Survey Voting Supplement indicated their "employment class", broadly one of two categories: employment by a nonprofit entity versus a forprofit entity. Nonprofit entities include the government and regular nonprofit organizations. Forprofit entities include most employers (retail, manafacturing, etc.) as well as the self-employed. Does working for the government increase your ability and/or your willingness to participate? I measure participation through respondents' turnout rates in the most recent national elections (2022), as reported in the survey. A regression analysis reveals that yes, indeed, working for a nonprofit entity is associated with greater turnout: workers at nonprofits turned out a rate 12.38% higher than workers at forprofits. I also explored the influence of one's household income on their turnout, assuming that income is a possible confounder: working at a forprofit could be associated with a lower income, and a lower income could be associated with a lower turnout. Income would be driving the difference in turnout between employment classes, then. I confirmed that lower income is associated with lower turnout by calculating the 2022 turnout rates of respondents belonging to various income groups ranging from below 15,000 dollars to above 150,000 dollars, data available in the same census survey (see Visualization section). The regression analysis offered further confirmation: a one dollar increase in annual household income was associated with 0.0002307% increase in turnout in 2022. I also confirmed that workers at forprofit entities receive lower incomes by comparing the average household incomes of nonprofit and forprofit workers: forprofit workers receive an average household income that is $6581.92 lower than what nonprofit workers receive. Therefore it is likely that household income is interfering with the effect of employment class. Naturally, my next step is to compare turnout rates across employment classes **within** income groups. 
+*(Code and older milestones below)*
 
 #loading data and selecting variables
 
-```{r}
+```{r, echo=FALSE}
 library(tidyverse)
 library(stringr)
 
@@ -31,7 +25,7 @@ census <- read_csv("census.csv")
 
 #preparing data
 
-```{r}
+```{r, echo=FALSE}
 #replacing coded values and creating new variables 
 
 census$employment_class <- census$employment_class |>
@@ -47,7 +41,7 @@ census <- census |>
 #creating binary employment type variable 
 census <- census |>
   mutate(employment_type = case_when(
-    employment_class == "Federal gov't" | employment_class == "State gov't" | employment_class == "Local gov't" | employment_class == "Non profit" ~ "Not company",
+    employment_class == "Federal gov't" | employment_class == "State gov't" | employment_class == "Local gov't" | employment_class == "Non profit" ~ "Non-company",
     employment_class == "For profit" ~ "Company"))
 
 #numeric voted variable
@@ -113,11 +107,11 @@ census$house_income_num <- census$income_code |>
              16 ~ 150000)
 ```
 
-## Exploratory Data Analysis
+# Analysis
 
 I am first interested in gauging which group recorded a higher turnout rate in 2022. I will start by calculating turnout rates for each of the two employment type categories, then will break the nonprofit category down and calculate the rates for each of the five employment classes. I will visualize both sets of rates as barplots, and conclude by calculating the differences in turnout rates to estimate the effect of employment type on one's electoral participation. 
 
-```{r}
+```{r, echo=FALSE}
 #calculating turnout rates by employment type
 employment_type_turnout <- census |>
   group_by(employment_type) |>
@@ -131,7 +125,7 @@ employment_class_turnout <- census |>
 knitr::kable(employment_class_turnout, digits = 2)
 ```
 
-```{r}
+```{r, echo=FALSE}
 #plotting turnout rates by employment type
 employment_type_turnout_plot <- employment_type_turnout |>
   ggplot(mapping = aes(x = employment_type, y = turnout)) +
@@ -161,33 +155,56 @@ employment_class_turnout_plot <- employment_class_turnout_plot + labs(caption = 
 employment_class_turnout_plot
 ```
 
-```{r}
+```{r, echo=FALSE}
 diff_in_type_rates <- employment_type_turnout |>
   pivot_wider(names_from = employment_type,
               values_from = turnout) |>
-  mutate(difference = `Not company` - Company) |>
+  mutate(difference = `Non-company` - Company) |>
   select(difference)
-diff_in_type_rates
+knitr::kable(diff_in_type_rates)
 ```
-Those not working at a company turned out at a rate 16.01% higher than those working at a company in 2022. Workers for the federal government, state government, local government and nonprofits all turned out at rates higher than 70%, meanwhile workers at forprofit companies turned out at a rate of 57%. This suggests that there is something unique about working at a forprofit company that inhibits one's ability or willingness to participate in elections. Every other kind of worker participates much more. 
+Those who work at a non-company turned out at a rate 16.01% higher than those working at a company in 2022. Workers for the federal government, state government, local government and nonprofits all turned out at rates higher than 70%, meanwhile workers at forprofit companies turned out at a rate of 57%. This suggests that there is something unique about working at a forprofit company that inhibits one's ability or willingness to participate in elections. Every other kind of worker participates much more. 
 
 I confirm the results using confidence interval/ hypothesis test
 
-It could be income that is driving this effect, rather than the factors I identified in my hypothesis. 
+An important feature of one's employment is their wage or salary. Income could have something to do with the observed effect, especially if one group receives a higher income than the other. I first calculate and compare the average annual household incomes of the two types, those who work for a company and those who work for a non-company. 
 
-I first calculate the average household income between the employment types and classes. It turns out that those at companies make the least income. 
+```{r, echo=FALSE}
+type_income_average <- census |>
+  group_by(employment_type) |>
+  summarize(`Average household income` = mean(house_income_num)) |>
+  pivot_wider(names_from = employment_type,
+              values_from = `Average household income`) |>
+  mutate(difference = `Non-company` - Company)
+knitr::kable(type_income_average, digits = 2)
+```
 
-Does that matter? I find out by calculating turnout rates within income groups to estimate the effect of income on turnout. It turns out higher income groups turnout more. 
+Those who work at non-companies made on average $7025.72 more in 2022 than those who work at companies. It could be that making a higher income drives one's ability or willingness to participate in elections, since the same people who make the highest incomes are the ones who turnout to vote at the highest rates. To explore the relationship between income and turnout, I calculate and plot the turnout rates of each annual household income group in 2022. 
 
-I confirm this association via a regression analysis. 
+```{r, echo=FALSE}
+income_group_turnout <- census |>
+  group_by(broad_income_categories) |>
+  summarize(turnout = mean(voted_num) * 100)
+income_group_turnout <- arrange(income_group_turnout, desc(turnout))
+knitr::kable(income_group_turnout, digits = 2)
 
-How can I gauge effect of employment type in light of this confounder? Calculate turnout rates of employment types within each income group. Turns out that the effect of employment type persists within each group. 
+income_group_turnout_plot <- income_group_turnout |>
+  ggplot(mapping = aes(x = fct_reorder(broad_income_categories, turnout), y = turnout)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Relationship between annual household income and electoral participation",
+    x = "Annual household income (in thousands of dollars)",
+    y = "Turnout (%) in 2022 national nlections"
+  ) +
+  theme_classic()
+income_group_turnout_plot
+```
+It seems as though income is related to turnout: the highest income groups turnout the most, the lowest income groups turnout the least. 
 
-Can I conclude that there is causation? 
+I confirm the association between employment type, turnout and income via a regression analysis. 
 
-#regression
-
-```{r}
+```{r, echo=FALSE}
 lm <- summary(lm(voted_num ~ employment_type * house_income_num, data = census))
 
 lm |>
@@ -196,70 +213,11 @@ lm |>
   knitr::kable()
 ```
 
-**Holding household income constant, workers at nonprofits turned out at a rate 19.19% higher than workers at forprofits. When holding employment type constant, a one dollar increase in household income was associated with a 0.00025% increase in turnout. For each dollar increase in household income, workers at nonprofits experienced a decrease in turnout of 0.00007% *compared* to workers at forprofits. In other words, the positive effect of household income is attenuated for workers at nonprofits. Their turnout is less impacted by changes in income.**
+Holding household income constant, workers at nonprofits turned out at a rate 19.19% higher than workers at forprofits. When holding employment type constant, a one dollar increase in household income was associated with a 0.00025% increase in turnout. For each dollar increase in household income, workers at nonprofits experienced a decrease in turnout of 0.00007% *compared* to workers at forprofits. In other words, the positive effect of household income is attenuated for workers at nonprofits. Their turnout is less impacted by changes in income.
 
+How can I gauge effect of employment type in light of this confounder? Calculate turnout rates of employment types within each income group.
 
-```{r}
-#comparing average household income across employment types
-
-type_income_mean <- census |>
-  group_by(employment_type) |>
-  summarize(house_income = mean(house_income_num)) |>
-  pivot_wider(names_from = employment_type,
-              values_from = house_income) |>
-  mutate(difference = Nonprofit - Forprofit)
-
-knitr::kable(type_income_mean)
-
-```
-
-```{r}
-
-#calculating turnout rates by income group 
-
-income_turnout <- census |>
-  group_by(broad_income_categories) |>
-  summarize(turnout = mean(voted_num) * 100) 
-
-knitr::kable(income_turnout, digits = 2)
-
-#plotting turnout rates by income group
-
-income_turnout_plot <- income_turnout |>
-  ggplot(mapping = aes(x = fct_reorder(broad_income_categories, turnout), y = turnout)) +
-  geom_col() +
-  coord_flip() +
-  labs(
-    title = "Impact of Household Income on Electoral Participation",
-    x = "Annual household income (in thousands of dollars)",
-    y = "Turnout (%) in 2022 national nlections"
-  ) +
-  theme_classic()
-
-income_turnout_plot
-
-```
-
-
-
-```{r}
-#calculating turnout rates of employment classes within income groups
-
-class__income_turnout <- census |>
-  group_by(broad_income_categories, employment_class) |>
-  summarize(turnout = mean(voted_num) * 100)
-
-custom_levels <- c("150,000 or more","100,000 to 149,999","60,000 to 99,999", "35,000 to 59,999", "15,000 to 34,999", "Below 15,000")
-class__income_turnout$broad_income_categories <- factor(class__income_turnout$broad_income_categories, levels = custom_levels)
-
-knitr::kable(class__income_turnout, digits = 2)
-
-ggplot(class__income_turnout, aes(x = fct_reorder (employment_class, turnout), y = turnout)) +
-  geom_col(aes(fill = broad_income_categories), position = "dodge") +
-  facet_wrap(~broad_income_categories, nrow=2, scales = "fixed") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  labs(x = "Employment class", y = "Turnout (%) in 2022 national elections")
- 
+```{r, echo=FALSE}
 #calculating turnout rates of employment types within income groups
 
 type_income_turnout <- census |>
@@ -275,25 +233,33 @@ type_income_turnout_plot <- type_income_turnout |>
     facet_wrap(~broad_income_categories, ncol = 3, scales = "free_x", drop = TRUE) +
     theme(
         axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()
-    ) +
+        axis.ticks.x = element_blank()) +
   labs(title = "By annual household income group (in thousands of dollars)", x = NULL, y = "Turnout (%) in 2022 national elections")
 type_income_turnout_plot
 
 ```
 
+Turns out that the effect of employment type persists within each group. 
+Can I conclude that there is causation? 
 
+# Code
 
+```{r print-code, ref.label=knitr::all_labels(), echo = TRUE, eval=FALSE}
 
+```
 
+## Milestones
 
+# Milestones 3 and 4
 
-## Milestone 2
+I am interested in studying the effect of one's mode---or "class"---of work on their democratic participation. Respondents to the U.S. Census Bureau's most recent Current Population Survey Voting Supplement indicated their "employment class", broadly one of two categories: employment by a nonprofit entity versus a forprofit entity. Nonprofit entities include the government and regular nonprofit organizations. Forprofit entities include most employers (retail, manafacturing, etc.) as well as the self-employed. Does working for the government increase your ability and/or your willingness to participate? I measure participation through respondents' turnout rates in the most recent national elections (2022), as reported in the survey. A regression analysis reveals that yes, indeed, working for a nonprofit entity is associated with greater turnout: workers at nonprofits turned out a rate 12.38% higher than workers at forprofits. I also explored the influence of one's household income on their turnout, assuming that income is a possible confounder: working at a forprofit could be associated with a lower income, and a lower income could be associated with a lower turnout. Income would be driving the difference in turnout between employment classes, then. I confirmed that lower income is associated with lower turnout by calculating the 2022 turnout rates of respondents belonging to various income groups ranging from below 15,000 dollars to above 150,000 dollars, data available in the same census survey (see Visualization section). The regression analysis offered further confirmation: a one dollar increase in annual household income was associated with 0.0002307% increase in turnout in 2022. I also confirmed that workers at forprofit entities receive lower incomes by comparing the average household incomes of nonprofit and forprofit workers: forprofit workers receive an average household income that is $6581.92 lower than what nonprofit workers receive. Therefore it is likely that household income is interfering with the effect of employment class. Naturally, my next step is to compare turnout rates across employment classes **within** income groups. 
+
+# Milestone 2
 
 Does one's class of work affect their degree of democratic participation? I plan to investigate how work conditions influence the ability or willingness of workers to vote. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed and (2) work less hours. Proximity to politics can inspire or pressure one to participate. A less demanding work schedule allows one the time needed to engage in politics. I expect to find, therefore, that government and non-profit employees and the self-employed participate the most: government and non-profit employees due to their proximity to politics, and the self-employed due to their control over their schedules. In election years, the Current Population Survey conducted by the U.S. Census Bureau asks tens of thousands of Americans whether or not they voted in the most recent national election. The latest edition of the survey, based on the 2022 elections, features 264,707,835 responses. On top of vote status, the survey asks respondents to report their "class" of work, one of six categories: employment by (1) the federal government, (2) a state government, (3) a local government, (4) a private for-profit company, (5) a private non-profit entity, or (6) no one (i.e., self-employed). I can compare the turnout rates of each group in the 2022 national elections to determine which participated the most. In other words, the explanatory variable of interest is "class" of work as defined by the Census Bureau and the outcome variable of interest is whether or not the respondent voted (coded "1" for voted and "2" for not voted in the dataset). If my hypothesis is correct, I will observe that workers of classes 1, 2, 3, and 5 (government and non-profit employees) and 6 (the self-employed) turned out to vote at the highest rates in 2022. Workers of class 4 (for-profit employees), who are by far the largest group in the dataset, will have turned out the least.
 
 Link to the dataset: <https://data.census.gov/mdat/#/search?ds=CPSVOTING202211&cv=HEFAMINC,PES1&rv=PEIO1COW&wt=HWHHWGT>
 
-## Project thoughts
+# Project thoughts (Milestone 1)
 
 I am interested in exploring the impact of British Commonwealth membership on political attitudes, nationalism, and democratic participation. Do citizens of countries that remove the Monarch as their head of state develop a greater sense of national pride and therefore a greater desire to participate politically? I can measure this using voter turnout rates and surveys of populations that have experienced such a transition.

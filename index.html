@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["census.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.21/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["census.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-4-2.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.21/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1543,228 +1543,36 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p><em>(Older milestones below)</em></p>
-<h2 id="milestone-3-and-4">Milestone 3 and 4</h2>
-<p><strong>See Analysis section for regression and difference in means code/output.</strong></p>
-<p>I am interested in studying the effect of one’s mode—or “class”—of work on their democratic participation. Respondents to the U.S. Census Bureau’s most recent Current Population Survey Voting Supplement indicated their “employment class”, broadly one of two categories: employment by a nonprofit entity versus a forprofit entity. Nonprofit entities include the government and regular nonprofit organizations. Forprofit entities include most employers (retail, manafacturing, etc.) as well as the self-employed. Does working for the government increase your ability and/or your willingness to participate? I measure participation through respondents’ turnout rates in the most recent national elections (2022), as reported in the survey. A regression analysis reveals that yes, indeed, working for a nonprofit entity is associated with greater turnout: workers at nonprofits turned out a rate 12.38% higher than workers at forprofits. I also explored the influence of one’s household income on their turnout, assuming that income is a possible confounder: working at a forprofit could be associated with a lower income, and a lower income could be associated with a lower turnout. Income would be driving the difference in turnout between employment classes, then. I confirmed that lower income is associated with lower turnout by calculating the 2022 turnout rates of respondents belonging to various income groups ranging from below 15,000 dollars to above 150,000 dollars, data available in the same census survey (see Visualization section). The regression analysis offered further confirmation: a one dollar increase in annual household income was associated with 0.0002307% increase in turnout in 2022. I also confirmed that workers at forprofit entities receive lower incomes by comparing the average household incomes of nonprofit and forprofit workers: forprofit workers receive an average household income that is $6581.92 lower than what nonprofit workers receive. Therefore it is likely that household income is interfering with the effect of employment class. Naturally, my next step is to compare turnout rates across employment classes <strong>within</strong> income groups.</p>
-<p>#loading data</p>
+<p><em>(Code and older milestones below)</em></p>
+<p>#loading data and selecting variables</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://stringr.tidyverse.org'>stringr</a></span><span class='op'>)</span></span>
-<span></span>
-<span><span class='co'>#loading data</span></span>
-<span></span>
-<span><span class='co'>#census_raw &lt;- read_csv("nov22pub (1).csv")</span></span>
-<span></span>
-<span><span class='co'>#selecting variables </span></span>
-<span></span>
-<span><span class='co'>#census &lt;- census_raw |&gt;</span></span>
-<span>  <span class='co'>#select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC)</span></span>
-<span></span>
-<span><span class='co'>#write.csv(census,"census.csv")</span></span>
-<span></span>
-<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"census.csv"</span><span class='op'>)</span></span></code></pre>
-</div>
+
 </div>
 <p>#preparing data</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#replacing coded values</span></span>
-<span></span>
-<span><span class='va'>census</span><span class='op'>$</span><span class='va'>employment_class</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>employment_class</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"Federal gov't"</span>,</span>
-<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"State gov't"</span>,</span>
-<span>             <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"Local gov't"</span>, </span>
-<span>             <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"For profit"</span>,</span>
-<span>             <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"Non profit"</span>,</span>
-<span>             <span class='fl'>6</span> <span class='op'>~</span> <span class='st'>"Self-employed Inc."</span>,</span>
-<span>             <span class='fl'>7</span> <span class='op'>~</span> <span class='st'>"Self-employed Non-Inc."</span>,</span>
-<span>             <span class='fl'>8</span> <span class='op'>~</span> <span class='st'>"Unpaid"</span>,</span>
-<span>             .default<span class='op'>=</span><span class='st'>"other"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>census</span><span class='op'>$</span><span class='va'>voted_num</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>voted</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='fl'>1</span>,</span>
-<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='fl'>0</span>,</span>
-<span>             .default<span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>census</span><span class='op'>$</span><span class='va'>voted</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>voted</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"Yes"</span>,</span>
-<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"No"</span>,</span>
-<span>             .default <span class='op'>=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>census</span><span class='op'>$</span><span class='va'>house_income</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>income_code</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"other"</span>,</span>
-<span>             <span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"less than 5"</span>,</span>
-<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"5 to 7.499"</span>,</span>
-<span>             <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"7.5 to 9.999"</span>, </span>
-<span>             <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"10 to 12.499"</span>,</span>
-<span>             <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"12.5 to 14.999"</span>,</span>
-<span>             <span class='fl'>6</span> <span class='op'>~</span> <span class='st'>"15 to 19.999"</span>,</span>
-<span>             <span class='fl'>7</span> <span class='op'>~</span> <span class='st'>"20 to 24.999"</span>,</span>
-<span>             <span class='fl'>8</span> <span class='op'>~</span> <span class='st'>"25 to 29.999"</span>,</span>
-<span>             <span class='fl'>9</span> <span class='op'>~</span> <span class='st'>"30 to 34.999"</span>,</span>
-<span>             <span class='fl'>10</span> <span class='op'>~</span> <span class='st'>"35 to 39.999"</span>,</span>
-<span>             <span class='fl'>11</span> <span class='op'>~</span> <span class='st'>"40 to 49.999"</span>,</span>
-<span>             <span class='fl'>12</span> <span class='op'>~</span> <span class='st'>"50 to 59.999"</span>,</span>
-<span>             <span class='fl'>13</span> <span class='op'>~</span> <span class='st'>"60 to 74.999"</span>,</span>
-<span>             <span class='fl'>14</span> <span class='op'>~</span> <span class='st'>"75 to 99.999"</span>,</span>
-<span>             <span class='fl'>15</span> <span class='op'>~</span> <span class='st'>"100 to 149.999"</span>,</span>
-<span>             <span class='fl'>16</span> <span class='op'>~</span> <span class='st'>"150 or more"</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='co'>#broadening household income categories</span></span>
-<span></span>
-<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>broad_income_categories <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
-<span>    <span class='va'>income_code</span> <span class='op'>&gt;=</span> <span class='fl'>1</span> <span class='op'>&amp;</span> <span class='va'>income_code</span> <span class='op'>&lt;=</span> <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"Below 15,000"</span>,</span>
-<span>    <span class='va'>income_code</span> <span class='op'>&gt;=</span> <span class='fl'>6</span> <span class='op'>&amp;</span> <span class='va'>income_code</span> <span class='op'>&lt;=</span> <span class='fl'>9</span> <span class='op'>~</span> <span class='st'>"15,000 to 34,999"</span>,</span>
-<span>    <span class='va'>income_code</span> <span class='op'>&gt;=</span> <span class='fl'>10</span> <span class='op'>&amp;</span> <span class='va'>income_code</span> <span class='op'>&lt;=</span> <span class='fl'>12</span> <span class='op'>~</span> <span class='st'>"35,000 to 59,999"</span>,</span>
-<span>    <span class='va'>income_code</span> <span class='op'>&gt;=</span> <span class='fl'>13</span> <span class='op'>&amp;</span> <span class='va'>income_code</span> <span class='op'>&lt;=</span> <span class='fl'>14</span> <span class='op'>~</span> <span class='st'>"60,000 to 99,999"</span>,</span>
-<span>    <span class='va'>income_code</span> <span class='op'>==</span> <span class='fl'>15</span> <span class='op'>~</span> <span class='st'>"100,000 to 149,999"</span>,</span>
-<span>    <span class='va'>income_code</span> <span class='op'>==</span> <span class='fl'>16</span> <span class='op'>~</span> <span class='st'>"150,000 or more"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='co'>#creating numeric household_income variable by taking average of upper/lower bounds</span></span>
-<span></span>
-<span><span class='va'>census</span><span class='op'>$</span><span class='va'>house_income_num</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>income_code</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='fl'>2500</span>,</span>
-<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='fl'>6250</span>,</span>
-<span>             <span class='fl'>3</span> <span class='op'>~</span> <span class='fl'>8750</span>, </span>
-<span>             <span class='fl'>4</span> <span class='op'>~</span> <span class='fl'>11250</span>,</span>
-<span>             <span class='fl'>5</span> <span class='op'>~</span> <span class='fl'>13750</span>,</span>
-<span>             <span class='fl'>6</span> <span class='op'>~</span> <span class='fl'>17500</span>,</span>
-<span>             <span class='fl'>7</span> <span class='op'>~</span> <span class='fl'>22500</span>,</span>
-<span>             <span class='fl'>8</span> <span class='op'>~</span> <span class='fl'>27500</span>,</span>
-<span>             <span class='fl'>9</span> <span class='op'>~</span> <span class='fl'>32500</span>,</span>
-<span>             <span class='fl'>10</span> <span class='op'>~</span> <span class='fl'>37500</span>,</span>
-<span>             <span class='fl'>11</span> <span class='op'>~</span> <span class='fl'>45000</span>,</span>
-<span>             <span class='fl'>12</span> <span class='op'>~</span> <span class='fl'>55000</span>,</span>
-<span>             <span class='fl'>13</span> <span class='op'>~</span> <span class='fl'>67500</span>,</span>
-<span>             <span class='fl'>14</span> <span class='op'>~</span> <span class='fl'>87500</span>,</span>
-<span>             <span class='fl'>15</span> <span class='op'>~</span> <span class='fl'>125000</span>,</span>
-<span>             <span class='fl'>16</span> <span class='op'>~</span> <span class='fl'>150000</span>,</span>
-<span>             .default <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='co'>#creating binary forprofit versus nonprofit variable</span></span>
-<span></span>
-<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>employment_type <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
-<span>    <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Federal gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"State gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Local gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Non profit"</span> <span class='op'>~</span> <span class='st'>"Nonprofit"</span>,</span>
-<span>    <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"For profit"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Self-employed Inc."</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Self-employed Non-Inc."</span> <span class='op'>~</span> <span class='st'>"Forprofit"</span>,</span>
-<span>    <span class='cn'>TRUE</span> <span class='op'>~</span> <span class='st'>"other"</span></span>
-<span>  <span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='co'>#filtering out other</span></span>
-<span></span>
-<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>employment_type</span> <span class='op'>!=</span> <span class='st'>"other"</span>,</span>
-<span>         <span class='va'>voted</span> <span class='op'>!=</span> <span class='st'>"other"</span><span class='op'>)</span></span></code></pre>
+
 </div>
-</div>
-<h2 id="analysis">Analysis</h2>
-<p>#regression</p>
+<h1 id="analysis">Analysis</h1>
+<p>I am first interested in gauging which group recorded a higher turnout rate in 2022. I will start by calculating turnout rates for each of the two employment type categories, then will break the nonprofit category down and calculate the rates for each of the five employment classes. I will visualize both sets of rates as barplots, and conclude by calculating the differences in turnout rates to estimate the effect of employment type on one’s electoral participation.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>lm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_type</span> <span class='op'>+</span> <span class='va'>house_income_num</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>lm</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span>  </span>
-<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>)</span></span></code></pre>
-</div>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
+<th style="text-align: left;">employment_type</th>
+<th style="text-align: right;">turnout</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.3781670</td>
+<td style="text-align: left;">Company</td>
+<td style="text-align: right;">56.92</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">employment_typeNonprofit</td>
-<td style="text-align: right;">0.1237926</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">house_income_num</td>
-<td style="text-align: right;">0.0000023</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>Workers at nonprofits turned out at a rate 12.38% higher than workers at forprofits. A one dollar increase in annual household income is associated with 0.0002307% increase in turnout.</strong></p>
-<p>#difference in means</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>diff_in_means</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>turnout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>voted_num</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>employment_type</span>,</span>
-<span>              values_from <span class='op'>=</span> <span class='va'>turnout</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>DIM <span class='op'>=</span> <span class='va'>Nonprofit</span> <span class='op'>-</span> <span class='va'>Forprofit</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>diff_in_means</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
-</div>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Forprofit</th>
-<th style="text-align: right;">Nonprofit</th>
-<th style="text-align: right;">DIM</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">59.04</td>
+<td style="text-align: left;">Non-company</td>
 <td style="text-align: right;">72.93</td>
-<td style="text-align: right;">13.9</td>
 </tr>
 </tbody>
 </table>
-</div>
-<p><strong>The average turnout for workers at nonprofit entities was 13.9% higher than workers at forprofit entities.</strong></p>
-<h2 id="visualization">Visualization</h2>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#calculating average household income across employment types</span></span>
-<span></span>
-<span><span class='va'>type_income_mean</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>house_income <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>house_income_num</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>employment_type</span>,</span>
-<span>              values_from <span class='op'>=</span> <span class='va'>house_income</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>difference <span class='op'>=</span> <span class='va'>Nonprofit</span> <span class='op'>-</span> <span class='va'>Forprofit</span><span class='op'>)</span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>type_income_mean</span><span class='op'>)</span></span></code></pre>
-</div>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Forprofit</th>
-<th style="text-align: right;">Nonprofit</th>
-<th style="text-align: right;">difference</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">91981.82</td>
-<td style="text-align: right;">98563.74</td>
-<td style="text-align: right;">6581.921</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#calculating turnout rates by employment class</span></span>
-<span></span>
-<span><span class='va'>employment_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_class</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>turnout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>voted_num</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>employment_turnout</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
-</div>
 <table>
 <thead>
 <tr class="header">
@@ -1790,53 +1598,52 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <td style="text-align: right;">71.29</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Self-employed Inc.</td>
-<td style="text-align: right;">75.04</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Self-employed Non-Inc.</td>
-<td style="text-align: right;">69.01</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">State gov’t</td>
 <td style="text-align: right;">74.29</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#plotting turnout rates by employment class</span></span>
-<span></span>
-<span><span class='va'>employment_turnout_plot</span> <span class='op'>&lt;-</span> <span class='va'>employment_turnout</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/fct_reorder.html'>fct_reorder</a></span><span class='op'>(</span><span class='va'>employment_class</span>, <span class='va'>turnout</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>turnout</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_flip.html'>coord_flip</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>    title <span class='op'>=</span> <span class='st'>"Impact of Employment Class on Electoral Participation"</span>,</span>
-<span>    x <span class='op'>=</span> <span class='st'>"Employment class"</span>,</span>
-<span>    y <span class='op'>=</span> <span class='st'>"Turnout (%) in 2022 national elections"</span>,</span>
-<span>    caption <span class='op'>=</span> <span class='st'>"Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government. (U.S. Census Bureau)"</span></span>
-<span>  <span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.margin <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>margin</a></span><span class='op'>(</span>b <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>wrapped_caption</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_wrap.html'>str_wrap</a></span><span class='op'>(</span><span class='st'>"Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government. (U.S. Census Bureau)"</span>, width <span class='op'>=</span> <span class='fl'>112</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>employment_turnout_plot</span> <span class='op'>&lt;-</span> <span class='va'>employment_turnout_plot</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='va'>wrapped_caption</span><span class='op'>)</span></span>
-<span></span>
-<span><span class='va'>employment_turnout_plot</span></span></code></pre>
-</div>
-<p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#calculating turnout rates by income group </span></span>
-<span></span>
-<span><span class='va'>income_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>broad_income_categories</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>turnout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>voted_num</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span> </span>
-<span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>income_turnout</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-4-2.png" width="624" /></p>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">16.01072</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Those who work at a non-company turned out at a rate 16.01% higher than those working at a company in 2022. Workers for the federal government, state government, local government and nonprofits all turned out at rates higher than 70%, meanwhile workers at forprofit companies turned out at a rate of 57%. This suggests that there is something unique about working at a forprofit company that inhibits one’s ability or willingness to participate in elections. Every other kind of worker participates much more.</p>
+<p>I confirm the results using confidence interval/ hypothesis test</p>
+<p>An important feature of one’s employment is their wage or salary. Income could have something to do with the observed effect, especially if one group receives a higher income than the other. I first calculate and compare the average annual household incomes of the two types, those who work for a company and those who work for a non-company.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Company</th>
+<th style="text-align: right;">Non-company</th>
+<th style="text-align: right;">difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">91538.02</td>
+<td style="text-align: right;">98563.74</td>
+<td style="text-align: right;">7025.72</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Those who work at non-companies made on average $7025.72 more in 2022 than those who work at companies. It could be that making a higher income drives one’s ability or willingness to participate in elections, since the same people who make the highest incomes are the ones who turnout to vote at the highest rates. To explore the relationship between income and turnout, I calculate and plot the turnout rates of each annual household income group in 2022.</p>
+<div class="layout-chunk" data-layout="l-body">
 <table>
 <thead>
 <tr class="header">
@@ -1846,53 +1653,262 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">100,000 to 149,999</td>
-<td style="text-align: right;">68.87</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">15,000 to 34,999</td>
-<td style="text-align: right;">44.36</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">150,000 or more</td>
-<td style="text-align: right;">75.09</td>
+<td style="text-align: right;">74.33</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">35,000 to 59,999</td>
-<td style="text-align: right;">51.20</td>
+<td style="text-align: left;">100,000 to 149,999</td>
+<td style="text-align: right;">68.18</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">60,000 to 99,999</td>
-<td style="text-align: right;">61.06</td>
+<td style="text-align: right;">59.70</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">35,000 to 59,999</td>
+<td style="text-align: right;">49.60</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15,000 to 34,999</td>
+<td style="text-align: right;">42.65</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Below 15,000</td>
-<td style="text-align: right;">40.10</td>
+<td style="text-align: right;">39.03</td>
 </tr>
 </tbody>
 </table>
+<p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+</div>
+<p>It seems as though income is related to turnout: the highest income groups turnout the most, the lowest income groups turnout the least.</p>
+<p>I confirm the association between employment type, turnout and income via a regression analysis.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">0.3356311</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">employment_typeNon-company</td>
+<td style="text-align: right;">0.2208707</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">house_income_num</td>
+<td style="text-align: right;">0.0000026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">employment_typeNon-company:house_income_num</td>
+<td style="text-align: right;">-0.0000008</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Holding household income constant, workers at nonprofits turned out at a rate 19.19% higher than workers at forprofits. When holding employment type constant, a one dollar increase in household income was associated with a 0.00025% increase in turnout. For each dollar increase in household income, workers at nonprofits experienced a decrease in turnout of 0.00007% <em>compared</em> to workers at forprofits. In other words, the positive effect of household income is attenuated for workers at nonprofits. Their turnout is less impacted by changes in income.</p>
+<p>How can I gauge effect of employment type in light of this confounder? Calculate turnout rates of employment types within each income group.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="index_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+</div>
+<p>Turns out that the effect of employment type persists within each group.
+Can I conclude that there is causation?</p>
+<h1 id="code">Code</h1>
+<div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>#plotting turnout rates by income group</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://stringr.tidyverse.org'>stringr</a></span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>income_turnout_plot</span> <span class='op'>&lt;-</span> <span class='va'>income_turnout</span> <span class='op'>|&gt;</span></span>
+<span><span class='co'>#census_raw &lt;- read_csv("nov22pub (1).csv")</span></span>
+<span><span class='co'>#census &lt;- census_raw |&gt;</span></span>
+<span>  <span class='co'>#select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC)</span></span>
+<span><span class='co'>#write.csv(census,"census.csv")</span></span>
+<span></span>
+<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"census.csv"</span><span class='op'>)</span></span>
+<span><span class='co'>#replacing coded values and creating new variables </span></span>
+<span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>employment_class</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>employment_class</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"Federal gov't"</span>,</span>
+<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"State gov't"</span>,</span>
+<span>             <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"Local gov't"</span>, </span>
+<span>             <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"For profit"</span>,</span>
+<span>             <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"Non profit"</span>,</span>
+<span>             .default <span class='op'>=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
+<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>employment_class</span> <span class='op'>!=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>#creating binary employment type variable </span></span>
+<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>employment_type <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Federal gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"State gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Local gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Non profit"</span> <span class='op'>~</span> <span class='st'>"Non-company"</span>,</span>
+<span>    <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"For profit"</span> <span class='op'>~</span> <span class='st'>"Company"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>#numeric voted variable</span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>voted_num</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>voted</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='fl'>1</span>,</span>
+<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='fl'>0</span>,</span>
+<span>             .default<span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span><span class='co'>#character voted variable</span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>voted</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>voted</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"Yes"</span>,</span>
+<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"No"</span>,</span>
+<span>             .default <span class='op'>=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
+<span><span class='co'>#filtering out others</span></span>
+<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>voted</span> <span class='op'>!=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>house_income</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>income_code</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"other"</span>,</span>
+<span>             <span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"less than 5"</span>,</span>
+<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"5 to 7.499"</span>,</span>
+<span>             <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"7.5 to 9.999"</span>, </span>
+<span>             <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"10 to 12.499"</span>,</span>
+<span>             <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"12.5 to 14.999"</span>,</span>
+<span>             <span class='fl'>6</span> <span class='op'>~</span> <span class='st'>"15 to 19.999"</span>,</span>
+<span>             <span class='fl'>7</span> <span class='op'>~</span> <span class='st'>"20 to 24.999"</span>,</span>
+<span>             <span class='fl'>8</span> <span class='op'>~</span> <span class='st'>"25 to 29.999"</span>,</span>
+<span>             <span class='fl'>9</span> <span class='op'>~</span> <span class='st'>"30 to 34.999"</span>,</span>
+<span>             <span class='fl'>10</span> <span class='op'>~</span> <span class='st'>"35 to 39.999"</span>,</span>
+<span>             <span class='fl'>11</span> <span class='op'>~</span> <span class='st'>"40 to 49.999"</span>,</span>
+<span>             <span class='fl'>12</span> <span class='op'>~</span> <span class='st'>"50 to 59.999"</span>,</span>
+<span>             <span class='fl'>13</span> <span class='op'>~</span> <span class='st'>"60 to 74.999"</span>,</span>
+<span>             <span class='fl'>14</span> <span class='op'>~</span> <span class='st'>"75 to 99.999"</span>,</span>
+<span>             <span class='fl'>15</span> <span class='op'>~</span> <span class='st'>"100 to 149.999"</span>,</span>
+<span>             <span class='fl'>16</span> <span class='op'>~</span> <span class='st'>"150 or more"</span><span class='op'>)</span></span>
+<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>house_income</span> <span class='op'>!=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
+<span><span class='co'>#broadening above household income categories</span></span>
+<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>broad_income_categories <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>income_code</span> <span class='op'>&gt;=</span> <span class='fl'>1</span> <span class='op'>&amp;</span> <span class='va'>income_code</span> <span class='op'>&lt;=</span> <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"Below 15,000"</span>,</span>
+<span>    <span class='va'>income_code</span> <span class='op'>&gt;=</span> <span class='fl'>6</span> <span class='op'>&amp;</span> <span class='va'>income_code</span> <span class='op'>&lt;=</span> <span class='fl'>9</span> <span class='op'>~</span> <span class='st'>"15,000 to 34,999"</span>,</span>
+<span>    <span class='va'>income_code</span> <span class='op'>&gt;=</span> <span class='fl'>10</span> <span class='op'>&amp;</span> <span class='va'>income_code</span> <span class='op'>&lt;=</span> <span class='fl'>12</span> <span class='op'>~</span> <span class='st'>"35,000 to 59,999"</span>,</span>
+<span>    <span class='va'>income_code</span> <span class='op'>&gt;=</span> <span class='fl'>13</span> <span class='op'>&amp;</span> <span class='va'>income_code</span> <span class='op'>&lt;=</span> <span class='fl'>14</span> <span class='op'>~</span> <span class='st'>"60,000 to 99,999"</span>,</span>
+<span>    <span class='va'>income_code</span> <span class='op'>==</span> <span class='fl'>15</span> <span class='op'>~</span> <span class='st'>"100,000 to 149,999"</span>,</span>
+<span>    <span class='va'>income_code</span> <span class='op'>==</span> <span class='fl'>16</span> <span class='op'>~</span> <span class='st'>"150,000 or more"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='co'>#creating numeric household income variable by taking average of upper/lower house_income bounds</span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>house_income_num</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>income_code</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='fl'>2500</span>,</span>
+<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='fl'>6250</span>,</span>
+<span>             <span class='fl'>3</span> <span class='op'>~</span> <span class='fl'>8750</span>, </span>
+<span>             <span class='fl'>4</span> <span class='op'>~</span> <span class='fl'>11250</span>,</span>
+<span>             <span class='fl'>5</span> <span class='op'>~</span> <span class='fl'>13750</span>,</span>
+<span>             <span class='fl'>6</span> <span class='op'>~</span> <span class='fl'>17500</span>,</span>
+<span>             <span class='fl'>7</span> <span class='op'>~</span> <span class='fl'>22500</span>,</span>
+<span>             <span class='fl'>8</span> <span class='op'>~</span> <span class='fl'>27500</span>,</span>
+<span>             <span class='fl'>9</span> <span class='op'>~</span> <span class='fl'>32500</span>,</span>
+<span>             <span class='fl'>10</span> <span class='op'>~</span> <span class='fl'>37500</span>,</span>
+<span>             <span class='fl'>11</span> <span class='op'>~</span> <span class='fl'>45000</span>,</span>
+<span>             <span class='fl'>12</span> <span class='op'>~</span> <span class='fl'>55000</span>,</span>
+<span>             <span class='fl'>13</span> <span class='op'>~</span> <span class='fl'>67500</span>,</span>
+<span>             <span class='fl'>14</span> <span class='op'>~</span> <span class='fl'>87500</span>,</span>
+<span>             <span class='fl'>15</span> <span class='op'>~</span> <span class='fl'>125000</span>,</span>
+<span>             <span class='fl'>16</span> <span class='op'>~</span> <span class='fl'>150000</span><span class='op'>)</span></span>
+<span><span class='co'>#calculating turnout rates by employment type</span></span>
+<span><span class='va'>employment_type_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>turnout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>voted_num</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>employment_type_turnout</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>#calculating turnout rates by employment class</span></span>
+<span><span class='va'>employment_class_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_class</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>turnout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>voted_num</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>employment_class_turnout</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span><span class='co'>#plotting turnout rates by employment type</span></span>
+<span><span class='va'>employment_type_turnout_plot</span> <span class='op'>&lt;-</span> <span class='va'>employment_type_turnout</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>employment_type</span>, y <span class='op'>=</span> <span class='va'>turnout</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Relationship Between Employment Type and Electoral Participation"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Employment type"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Turnout (%) in 2022 national elections"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>employment_type_turnout_plot</span></span>
+<span></span>
+<span><span class='co'>#plotting turnout rates by employment class</span></span>
+<span><span class='va'>employment_class_turnout_plot</span> <span class='op'>&lt;-</span> <span class='va'>employment_class_turnout</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/fct_reorder.html'>fct_reorder</a></span><span class='op'>(</span><span class='va'>employment_class</span>, <span class='va'>turnout</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>turnout</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_flip.html'>coord_flip</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Relationship Between Employment Class and Electoral Participation"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Employment class"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Turnout (%) in 2022 national elections"</span>,</span>
+<span>    caption <span class='op'>=</span> <span class='st'>"Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government (U.S. Census Bureau). Self-employed not included."</span></span>
+<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.margin <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>margin</a></span><span class='op'>(</span>b <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>wrapped_caption</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_wrap.html'>str_wrap</a></span><span class='op'>(</span><span class='st'>"Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government (U.S. Census Bureau). Self-employed not included."</span>, width <span class='op'>=</span> <span class='fl'>112</span><span class='op'>)</span></span>
+<span><span class='va'>employment_class_turnout_plot</span> <span class='op'>&lt;-</span> <span class='va'>employment_class_turnout_plot</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='va'>wrapped_caption</span><span class='op'>)</span></span>
+<span><span class='va'>employment_class_turnout_plot</span></span>
+<span><span class='va'>diff_in_type_rates</span> <span class='op'>&lt;-</span> <span class='va'>employment_type_turnout</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>employment_type</span>,</span>
+<span>              values_from <span class='op'>=</span> <span class='va'>turnout</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>difference <span class='op'>=</span> <span class='va'>`Non-company`</span> <span class='op'>-</span> <span class='va'>Company</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>difference</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>diff_in_type_rates</span><span class='op'>)</span></span>
+<span><span class='va'>type_income_average</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>`Average household income` <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>house_income_num</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>employment_type</span>,</span>
+<span>              values_from <span class='op'>=</span> <span class='va'>`Average household income`</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>difference <span class='op'>=</span> <span class='va'>`Non-company`</span> <span class='op'>-</span> <span class='va'>Company</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>type_income_average</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span><span class='va'>income_group_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>broad_income_categories</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>turnout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>voted_num</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span></span>
+<span><span class='va'>income_group_turnout</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='va'>income_group_turnout</span>, <span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>turnout</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>income_group_turnout</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>income_group_turnout_plot</span> <span class='op'>&lt;-</span> <span class='va'>income_group_turnout</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/fct_reorder.html'>fct_reorder</a></span><span class='op'>(</span><span class='va'>broad_income_categories</span>, <span class='va'>turnout</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>turnout</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_flip.html'>coord_flip</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>    title <span class='op'>=</span> <span class='st'>"Impact of Household Income on Electoral Participation"</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"Relationship between annual household income and electoral participation"</span>,</span>
 <span>    x <span class='op'>=</span> <span class='st'>"Annual household income (in thousands of dollars)"</span>,</span>
-<span>    y <span class='op'>=</span> <span class='st'>"Turnout (%) in 2022 National Elections"</span></span>
+<span>    y <span class='op'>=</span> <span class='st'>"Turnout (%) in 2022 national nlections"</span></span>
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='va'>income_group_turnout_plot</span></span>
+<span><span class='va'>lm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_type</span> <span class='op'>*</span> <span class='va'>house_income_num</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>income_turnout_plot</span></span></code></pre>
+<span><span class='va'>lm</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span>  </span>
+<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span><span class='co'>#calculating turnout rates of employment types within income groups</span></span>
+<span></span>
+<span><span class='va'>type_income_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>broad_income_categories</span>, <span class='va'>employment_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>turnout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>voted_num</span><span class='op'>)</span> <span class='op'>*</span><span class='fl'>100</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>custom_levels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"150,000 or more"</span>,<span class='st'>"100,000 to 149,999"</span>,<span class='st'>"60,000 to 99,999"</span>, <span class='st'>"35,000 to 59,999"</span>, <span class='st'>"15,000 to 34,999"</span>, <span class='st'>"Below 15,000"</span><span class='op'>)</span></span>
+<span><span class='va'>type_income_turnout</span><span class='op'>$</span><span class='va'>broad_income_categories</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>type_income_turnout</span><span class='op'>$</span><span class='va'>broad_income_categories</span>, levels <span class='op'>=</span> <span class='va'>custom_levels</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>type_income_turnout_plot</span> <span class='op'>&lt;-</span> <span class='va'>type_income_turnout</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>turnout</span><span class='op'>)</span>, y <span class='op'>=</span> <span class='va'>turnout</span>, fill <span class='op'>=</span> <span class='va'>employment_type</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>broad_income_categories</span>, ncol <span class='op'>=</span> <span class='fl'>3</span>, scales <span class='op'>=</span> <span class='st'>"free_x"</span>, drop <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span></span>
+<span>        axis.text.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
+<span>        axis.ticks.x <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"By annual household income group (in thousands of dollars)"</span>, x <span class='op'>=</span> <span class='cn'>NULL</span>, y <span class='op'>=</span> <span class='st'>"Turnout (%) in 2022 national elections"</span><span class='op'>)</span></span>
+<span><span class='va'>type_income_turnout_plot</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
 </div>
-<h2 id="milestone-2">Milestone 2</h2>
+<h2 id="milestones">Milestones</h2>
+<h1 id="milestones-3-and-4">Milestones 3 and 4</h1>
+<p>I am interested in studying the effect of one’s mode—or “class”—of work on their democratic participation. Respondents to the U.S. Census Bureau’s most recent Current Population Survey Voting Supplement indicated their “employment class”, broadly one of two categories: employment by a nonprofit entity versus a forprofit entity. Nonprofit entities include the government and regular nonprofit organizations. Forprofit entities include most employers (retail, manafacturing, etc.) as well as the self-employed. Does working for the government increase your ability and/or your willingness to participate? I measure participation through respondents’ turnout rates in the most recent national elections (2022), as reported in the survey. A regression analysis reveals that yes, indeed, working for a nonprofit entity is associated with greater turnout: workers at nonprofits turned out a rate 12.38% higher than workers at forprofits. I also explored the influence of one’s household income on their turnout, assuming that income is a possible confounder: working at a forprofit could be associated with a lower income, and a lower income could be associated with a lower turnout. Income would be driving the difference in turnout between employment classes, then. I confirmed that lower income is associated with lower turnout by calculating the 2022 turnout rates of respondents belonging to various income groups ranging from below 15,000 dollars to above 150,000 dollars, data available in the same census survey (see Visualization section). The regression analysis offered further confirmation: a one dollar increase in annual household income was associated with 0.0002307% increase in turnout in 2022. I also confirmed that workers at forprofit entities receive lower incomes by comparing the average household incomes of nonprofit and forprofit workers: forprofit workers receive an average household income that is $6581.92 lower than what nonprofit workers receive. Therefore it is likely that household income is interfering with the effect of employment class. Naturally, my next step is to compare turnout rates across employment classes <strong>within</strong> income groups.</p>
+<h1 id="milestone-2">Milestone 2</h1>
 <p>Does one’s class of work affect their degree of democratic participation? I plan to investigate how work conditions influence the ability or willingness of workers to vote. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed and (2) work less hours. Proximity to politics can inspire or pressure one to participate. A less demanding work schedule allows one the time needed to engage in politics. I expect to find, therefore, that government and non-profit employees and the self-employed participate the most: government and non-profit employees due to their proximity to politics, and the self-employed due to their control over their schedules. In election years, the Current Population Survey conducted by the U.S. Census Bureau asks tens of thousands of Americans whether or not they voted in the most recent national election. The latest edition of the survey, based on the 2022 elections, features 264,707,835 responses. On top of vote status, the survey asks respondents to report their “class” of work, one of six categories: employment by (1) the federal government, (2) a state government, (3) a local government, (4) a private for-profit company, (5) a private non-profit entity, or (6) no one (i.e., self-employed). I can compare the turnout rates of each group in the 2022 national elections to determine which participated the most. In other words, the explanatory variable of interest is “class” of work as defined by the Census Bureau and the outcome variable of interest is whether or not the respondent voted (coded “1” for voted and “2” for not voted in the dataset). If my hypothesis is correct, I will observe that workers of classes 1, 2, 3, and 5 (government and non-profit employees) and 6 (the self-employed) turned out to vote at the highest rates in 2022. Workers of class 4 (for-profit employees), who are by far the largest group in the dataset, will have turned out the least.</p>
 <p>Link to the dataset: <a href="https://data.census.gov/mdat/#/search?ds=CPSVOTING202211&amp;cv=HEFAMINC,PES1&amp;rv=PEIO1COW&amp;wt=HWHHWGT" class="uri">https://data.census.gov/mdat/#/search?ds=CPSVOTING202211&amp;cv=HEFAMINC,PES1&amp;rv=PEIO1COW&amp;wt=HWHHWGT</a></p>
-<h2 id="project-thoughts">Project thoughts</h2>
+<h1 id="project-thoughts-milestone-1">Project thoughts (Milestone 1)</h1>
 <p>I am interested in exploring the impact of British Commonwealth membership on political attitudes, nationalism, and democratic participation. Do citizens of countries that remove the Monarch as their head of state develop a greater sense of national pride and therefore a greater desire to participate politically? I can measure this using voter turnout rates and surveys of populations that have experienced such a transition.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
