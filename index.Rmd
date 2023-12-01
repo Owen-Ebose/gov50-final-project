@@ -17,7 +17,7 @@ library(stringr)
 
 #census_raw <- read_csv("nov22pub (1).csv")
 #census <- census_raw |>
-  #select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC)
+  #select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC, education=PEEDUCA, state=GESTFIPS)
 #write.csv(census,"census.csv")
 
 census <- read_csv("census.csv")
@@ -105,6 +105,34 @@ census$house_income_num <- census$income_code |>
              14 ~ 87500,
              15 ~ 125000,
              16 ~ 150000)
+census$education <- census$education |>
+  case_match(31 ~ "less than 1st grade",
+             32 ~ "1st-4th",
+             33 ~ "5th or 6th", 
+             34 ~ "7th or 8th",
+             35 ~ "9th",
+             36 ~ "10th",
+             37 ~ "11th",
+             38 ~ "12th no diploma",
+             39 ~ "high school diploma",
+             40 ~ "some college no degree",
+             41 ~ "associate degree vocational",
+             42 ~ "associate degree academic",
+             43 ~ "bachelor's degree",
+             44 ~ "master's degree",
+             45 ~ "professional degree",
+             46 ~ "doctorate degree")
+education_levels <- c("less than 1st grade", "1st-4th", "5th or 6th", "7th or 8th", "9th", "10th", "11th", "12th no diploma", "high school diploma", "some college no degree", "associate degree vocational", "associate degree academic", "bachelor's degree", "master's degree", "professional degree", "doctorate degree")
+census$education <- factor(census$education, levels = education_levels)
+
+census <- census |>
+  mutate(college_degree = case_when(
+    education == "less than 1st grade" | education == "1st-4th" | education == "5th or 6th" | education == "7th or 8th" | education == "9th" | education == "10th" | education == "11th" | education == "12th no diploma" | education == "high school diploma" | education == "some college no degree" ~ 0,
+    education == "associate degree vocational" | education == "associate degree academic" | education == "bachelor's degree" | education == "master's degree" | education == "professional degree" | education == "doctorate degree" ~ 1))
+
+census$state <- as.character(census$state)
+#see below for key 
+
 ```
 
 # Analysis
@@ -165,8 +193,6 @@ knitr::kable(diff_in_type_rates)
 ```
 Those who work at a non-company turned out at a rate 16.01% higher than those working at a company in 2022. Workers for the federal government, state government, local government and nonprofits all turned out at rates higher than 70%, meanwhile workers at forprofit companies turned out at a rate of 57%. This suggests that there is something unique about working at a forprofit company that inhibits one's ability or willingness to participate in elections. Every other kind of worker participates much more. 
 
-I confirm the results using confidence interval/ hypothesis test
-
 An important feature of one's employment is their wage or salary. Income could have something to do with the observed effect, especially if one group receives a higher income than the other. I first calculate and compare the average annual household incomes of the two types, those who work for a company and those who work for a non-company. 
 
 ```{r, echo=FALSE}
@@ -200,22 +226,24 @@ income_group_turnout_plot <- income_group_turnout |>
   theme_classic()
 income_group_turnout_plot
 ```
-It seems as though income is related to turnout: the highest income groups turnout the most, the lowest income groups turnout the least. 
 
-I confirm the association between employment type, turnout and income via a regression analysis. 
+It seems as though income is related to turnout: the highest income groups turnout the most, and the lowest income groups turnout the least. 
+
+In light of the likely relationship between income and turnout, I run a regression analysis to assess the relationship between employment type and turnout holding income constant. 
 
 ```{r, echo=FALSE}
-lm <- summary(lm(voted_num ~ employment_type * house_income_num, data = census))
+lm <- summary(lm(voted_num ~ employment_type + house_income_num + college_degree, data = census))
 
 lm |>
   broom::tidy() |>
-  select(term, estimate) |>  
+  select(term, estimate, p.value) |> 
   knitr::kable()
+
 ```
 
-Holding household income constant, workers at nonprofits turned out at a rate 19.19% higher than workers at forprofits. When holding employment type constant, a one dollar increase in household income was associated with a 0.00025% increase in turnout. For each dollar increase in household income, workers at nonprofits experienced a decrease in turnout of 0.00007% *compared* to workers at forprofits. In other words, the positive effect of household income is attenuated for workers at nonprofits. Their turnout is less impacted by changes in income.
 
-How can I gauge effect of employment type in light of this confounder? Calculate turnout rates of employment types within each income group.
+
+I further illustrate the effect of employment type on turnout holding income constant by calculating and visualizing the turnout rates of each type within income groups. 
 
 ```{r, echo=FALSE}
 #calculating turnout rates of employment types within income groups
@@ -239,8 +267,7 @@ type_income_turnout_plot
 
 ```
 
-Turns out that the effect of employment type persists within each group. 
-Can I conclude that there is causation? 
+Within each income group, workers at non-companies turnout more than workers at companies.
 
 # Code
 

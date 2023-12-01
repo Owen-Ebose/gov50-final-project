@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["census.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-4-2.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.21/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["census.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-4-2.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.21/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","nov22pub (1).csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1622,7 +1622,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </table>
 </div>
 <p>Those who work at a non-company turned out at a rate 16.01% higher than those working at a company in 2022. Workers for the federal government, state government, local government and nonprofits all turned out at rates higher than 70%, meanwhile workers at forprofit companies turned out at a rate of 57%. This suggests that there is something unique about working at a forprofit company that inhibits one’s ability or willingness to participate in elections. Every other kind of worker participates much more.</p>
-<p>I confirm the results using confidence interval/ hypothesis test</p>
 <p>An important feature of one’s employment is their wage or salary. Income could have something to do with the observed effect, especially if one group receives a higher income than the other. I first calculate and compare the average annual household incomes of the two types, those who work for a company and those who work for a non-company.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
@@ -1680,43 +1679,46 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </table>
 <p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
 </div>
-<p>It seems as though income is related to turnout: the highest income groups turnout the most, the lowest income groups turnout the least.</p>
-<p>I confirm the association between employment type, turnout and income via a regression analysis.</p>
+<p>It seems as though income is related to turnout: the highest income groups turnout the most, and the lowest income groups turnout the least.</p>
+<p>In light of the likely relationship between income and turnout, I run a regression analysis to assess the relationship between employment type and turnout holding income constant.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <thead>
 <tr class="header">
 <th style="text-align: left;">term</th>
 <th style="text-align: right;">estimate</th>
+<th style="text-align: right;">p.value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.3356311</td>
+<td style="text-align: right;">0.3268094</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">employment_typeNon-company</td>
-<td style="text-align: right;">0.2208707</td>
+<td style="text-align: right;">0.1072264</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">house_income_num</td>
-<td style="text-align: right;">0.0000026</td>
+<td style="text-align: right;">0.0000017</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">employment_typeNon-company:house_income_num</td>
-<td style="text-align: right;">-0.0000008</td>
+<td style="text-align: left;">college_degree</td>
+<td style="text-align: right;">0.1798491</td>
+<td style="text-align: right;">0</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Holding household income constant, workers at nonprofits turned out at a rate 19.19% higher than workers at forprofits. When holding employment type constant, a one dollar increase in household income was associated with a 0.00025% increase in turnout. For each dollar increase in household income, workers at nonprofits experienced a decrease in turnout of 0.00007% <em>compared</em> to workers at forprofits. In other words, the positive effect of household income is attenuated for workers at nonprofits. Their turnout is less impacted by changes in income.</p>
-<p>How can I gauge effect of employment type in light of this confounder? Calculate turnout rates of employment types within each income group.</p>
+<p>I further illustrate the effect of employment type on turnout holding income constant by calculating and visualizing the turnout rates of each type within income groups.</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="index_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
 </div>
-<p>Turns out that the effect of employment type persists within each group.
-Can I conclude that there is causation?</p>
+<p>Within each income group, workers at non-companies turnout more than workers at companies.</p>
 <h1 id="code">Code</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1725,7 +1727,7 @@ Can I conclude that there is causation?</p>
 <span></span>
 <span><span class='co'>#census_raw &lt;- read_csv("nov22pub (1).csv")</span></span>
 <span><span class='co'>#census &lt;- census_raw |&gt;</span></span>
-<span>  <span class='co'>#select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC)</span></span>
+<span>  <span class='co'>#select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC, education=PEEDUCA, state=GESTFIPS)</span></span>
 <span><span class='co'>#write.csv(census,"census.csv")</span></span>
 <span></span>
 <span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"census.csv"</span><span class='op'>)</span></span>
@@ -1808,6 +1810,34 @@ Can I conclude that there is causation?</p>
 <span>             <span class='fl'>14</span> <span class='op'>~</span> <span class='fl'>87500</span>,</span>
 <span>             <span class='fl'>15</span> <span class='op'>~</span> <span class='fl'>125000</span>,</span>
 <span>             <span class='fl'>16</span> <span class='op'>~</span> <span class='fl'>150000</span><span class='op'>)</span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>education</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>education</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>31</span> <span class='op'>~</span> <span class='st'>"less than 1st grade"</span>,</span>
+<span>             <span class='fl'>32</span> <span class='op'>~</span> <span class='st'>"1st-4th"</span>,</span>
+<span>             <span class='fl'>33</span> <span class='op'>~</span> <span class='st'>"5th or 6th"</span>, </span>
+<span>             <span class='fl'>34</span> <span class='op'>~</span> <span class='st'>"7th or 8th"</span>,</span>
+<span>             <span class='fl'>35</span> <span class='op'>~</span> <span class='st'>"9th"</span>,</span>
+<span>             <span class='fl'>36</span> <span class='op'>~</span> <span class='st'>"10th"</span>,</span>
+<span>             <span class='fl'>37</span> <span class='op'>~</span> <span class='st'>"11th"</span>,</span>
+<span>             <span class='fl'>38</span> <span class='op'>~</span> <span class='st'>"12th no diploma"</span>,</span>
+<span>             <span class='fl'>39</span> <span class='op'>~</span> <span class='st'>"high school diploma"</span>,</span>
+<span>             <span class='fl'>40</span> <span class='op'>~</span> <span class='st'>"some college no degree"</span>,</span>
+<span>             <span class='fl'>41</span> <span class='op'>~</span> <span class='st'>"associate degree vocational"</span>,</span>
+<span>             <span class='fl'>42</span> <span class='op'>~</span> <span class='st'>"associate degree academic"</span>,</span>
+<span>             <span class='fl'>43</span> <span class='op'>~</span> <span class='st'>"bachelor's degree"</span>,</span>
+<span>             <span class='fl'>44</span> <span class='op'>~</span> <span class='st'>"master's degree"</span>,</span>
+<span>             <span class='fl'>45</span> <span class='op'>~</span> <span class='st'>"professional degree"</span>,</span>
+<span>             <span class='fl'>46</span> <span class='op'>~</span> <span class='st'>"doctorate degree"</span><span class='op'>)</span></span>
+<span><span class='va'>education_levels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"less than 1st grade"</span>, <span class='st'>"1st-4th"</span>, <span class='st'>"5th or 6th"</span>, <span class='st'>"7th or 8th"</span>, <span class='st'>"9th"</span>, <span class='st'>"10th"</span>, <span class='st'>"11th"</span>, <span class='st'>"12th no diploma"</span>, <span class='st'>"high school diploma"</span>, <span class='st'>"some college no degree"</span>, <span class='st'>"associate degree vocational"</span>, <span class='st'>"associate degree academic"</span>, <span class='st'>"bachelor's degree"</span>, <span class='st'>"master's degree"</span>, <span class='st'>"professional degree"</span>, <span class='st'>"doctorate degree"</span><span class='op'>)</span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>education</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>census</span><span class='op'>$</span><span class='va'>education</span>, levels <span class='op'>=</span> <span class='va'>education_levels</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>college_degree <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"less than 1st grade"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"1st-4th"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"5th or 6th"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"7th or 8th"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"9th"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"10th"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"11th"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"12th no diploma"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"high school diploma"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"some college no degree"</span> <span class='op'>~</span> <span class='fl'>0</span>,</span>
+<span>    <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"associate degree vocational"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"associate degree academic"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"bachelor's degree"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"master's degree"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"professional degree"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"doctorate degree"</span> <span class='op'>~</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>census</span><span class='op'>$</span><span class='va'>state</span><span class='op'>)</span></span>
+<span><span class='co'>#see below for key </span></span>
+<span></span>
 <span><span class='co'>#calculating turnout rates by employment type</span></span>
 <span><span class='va'>employment_type_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
@@ -1876,12 +1906,13 @@ Can I conclude that there is causation?</p>
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span><span class='va'>income_group_turnout_plot</span></span>
-<span><span class='va'>lm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_type</span> <span class='op'>*</span> <span class='va'>house_income_num</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>lm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_type</span> <span class='op'>+</span> <span class='va'>house_income_num</span> <span class='op'>+</span> <span class='va'>college_degree</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>lm</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>|&gt;</span>  </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span>, <span class='va'>p.value</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
 <span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span></span>
 <span><span class='co'>#calculating turnout rates of employment types within income groups</span></span>
 <span></span>
 <span><span class='va'>type_income_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
