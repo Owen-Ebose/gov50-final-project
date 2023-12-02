@@ -1543,16 +1543,17 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<p>Is one’s ability or willingness to participate in democracy affected by where they work? This project examines the relationship between democratic participation and “employment class” as defined by the United States Census Bureau. The Bureau divides American workplaces into six classes: federal government, state government, local government, private for-profit, private non-profit, and self-employed. It sorts respondents to its monthly Current Population Survey into one of the six classes, on top of asking each about their voting history, household income, education level, location, and more. The most recent survey asks 126,097 respondents whether or not they voted in the 2022 national elections; I leverage the resulting estimated turnout rates as a measure of democratic participation. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed, (2) have more control over their schedules, and/or (3) benefit from workplace autonomy. The first because proximity to politics can inspire or pressure one to participate. The second because greater control over one’s schedule enables them to carve out time for political activities like rallies and voting. And the third because democratic theory literature suggests a relationship between autonomy in the workplace—that is, the ability of workers to dialogue and collaborate with bosses to shape their work experience and the direction of the organization—and participation in the polity: autonomous workers develop useful decision making and information processing tools and a sense of agency that carry over from the workplace to the political realm. Thus, I expect to find that workers for the government, non-profits, and the self-employed participate the most, while workers for for-profits participate the least. Government workplaces are proximate to politics in the sense that their mandates and directives are directly determined through the political process. Their bosses are or are appointed by politicians. Their day-to-day work experiences are shaped by politics so they are likely invested in political decision making. Those who are self-employed set their own work hours and can therefore carve out the time needed for political activity such as voting. Non-profit workplaces are often small, meaning workers have more opportunities to directly interface with decision makers. For-profit workplaces are often large and hierarchical; average workers have little opportunity to shape the direction of the company and limited control over their schedules, and may or may not be close to the political process.
-A broad pattern emerges from my hypothesis: I have predicted that workers for entities that are not companies (the government, non-profits, and the self-employed) will participate the most, while workers for companies (for-profits) will participate the least. To operationalize and test this hypothesis, I combine the six classes into two employment “types”: <em>“non-company”</em> and <em>“company”</em>. I include the self-employed in the “non-company” type because while they may helm a company, they do not work <em>for</em> a company, making them unique from employees for for-profits. I am thus essentially isolating and comparing the experience of working for a company to working for other kinds of entities. My hypothesis will be supported if I discover that workers at non-companies turned out at a greater rate than those at companies in 2022. I am comfortable using voter turnout as a measure of democratic participation because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote <em>and</em> engage in other democratic activities such as attending rallies.<br />
-I will first perform an exploratory data analysis. I will then run a regression analysis to discover the relationship between employment type and participation. I will conclude by discussing my findings and their interpretation, as well as potential flaws in the method and next steps. All code used to prepare/manipulate the data and produce the outputs can be found at the very bottom of the site.</p>
+<p>Is one’s ability or willingness to participate in democracy affected by where they work? This project examines the relationship between democratic participation and “employment class” as defined by the United States Census Bureau. The Bureau divides American workplaces into six classes: federal government, state government, local government, private for-profit, private non-profit, and self-employed. It sorts respondents to its monthly Current Population Survey into one of the six classes, on top of asking each about their voting history, household income, education level, location, and more. The most recent survey asks 126,097 respondents whether or not they voted in the 2022 national elections; I leverage the resulting estimated turnout rates as a measure of democratic participation. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed, (2) have more control over their schedules, and/or (3) benefit from workplace autonomy. The first because proximity to politics can inspire or pressure one to participate. The second because greater control over one’s schedule enables them to carve out time for political activities like rallies and voting. And the third because democratic theory literature suggests a relationship between autonomy in the workplace—that is, the ability of workers to dialogue and collaborate with bosses to shape their work experience and the direction of the organization—and participation in the polity: autonomous workers develop useful decision making and information processing tools and a sense of agency that carry over from the workplace to the political realm.</p>
+<p>In light of my hypothesis, I expect to find that workers for the government, non-profits, and the self-employed participate the most, while workers for for-profits participate the least. Government workplaces are proximate to politics in the sense that their mandates and directives are directly determined through the political process. Their bosses are or are appointed by politicians. Their day-to-day work experiences are shaped by politics so they are likely invested in political decision making. Those who are self-employed set their own work hours and can therefore carve out the time needed for political activity such as voting. Non-profit workplaces are often small, meaning workers have more opportunities to directly interface with decision makers. For-profit workplaces are often large and hierarchical; average workers have little opportunity to shape the direction of the company and limited control over their schedules, and may or may not be close to the political process.</p>
+<p>A broad pattern emerges from my hypothesis: I have predicted that workers for entities that are not companies (the government, non-profits, and the self-employed) will participate the most, while workers for companies (for-profits) will participate the least. To operationalize and test this hypothesis, I combine the six classes into two employment “types”: <em>“non-company”</em> and <em>“company”</em>. I include the self-employed in the “non-company” type because while they may helm a company, they do not work <em>for</em> a company, making them unique from employees for for-profits. I am thus essentially isolating and comparing the experience of working for a company to working for other kinds of entities. My hypothesis will be supported if I discover that workers at non-companies turned out at a greater rate than those at companies in 2022. I am comfortable using voter turnout as a measure of democratic participation because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote <em>and</em> engage in other democratic activities such as attending rallies.</p>
+<p>I will first perform an exploratory data analysis. I will then run a regression analysis to discover the relationship between employment type and participation. I will conclude by discussing my findings and their interpretation, as well as potential flaws in the method and next steps. All code used to prepare/manipulate the data and produce the outputs can be found at the very bottom of the site.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<h1 id="exploratory-data-analysis">Exploratory Data Analysis</h1>
+<h1 id="exploratory-data-analysis">Exploratory data analysis</h1>
 <p>proportions of each class in the dataset</p>
 <p>I am first interested in gauging which group recorded a higher turnout rate in 2022. I will start by calculating turnout rates for each of the two employment type categories, then will break the nonprofit category down and calculate the rates for each of the five employment classes. I will visualize both sets of rates as barplots, and conclude by calculating the differences in turnout rates to estimate the effect of employment type on one’s electoral participation.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1694,23 +1695,273 @@ I will first perform an exploratory data analysis. I will then run a regression 
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.3268094</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.2907956</td>
+<td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">employment_typeNon-company</td>
-<td style="text-align: right;">0.1072264</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1075944</td>
+<td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">house_income_num</td>
 <td style="text-align: right;">0.0000017</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">college_degree</td>
-<td style="text-align: right;">0.1798491</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.1771950</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state10</td>
+<td style="text-align: right;">0.0267060</td>
+<td style="text-align: right;">0.3883737</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state11</td>
+<td style="text-align: right;">0.0289727</td>
+<td style="text-align: right;">0.2558304</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state12</td>
+<td style="text-align: right;">0.0622373</td>
+<td style="text-align: right;">0.0046037</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state13</td>
+<td style="text-align: right;">0.1190345</td>
+<td style="text-align: right;">0.0000035</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state15</td>
+<td style="text-align: right;">0.0071089</td>
+<td style="text-align: right;">0.7991329</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state16</td>
+<td style="text-align: right;">-0.0814083</td>
+<td style="text-align: right;">0.0016121</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state17</td>
+<td style="text-align: right;">0.0497394</td>
+<td style="text-align: right;">0.0331085</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state18</td>
+<td style="text-align: right;">-0.0621759</td>
+<td style="text-align: right;">0.0163355</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state19</td>
+<td style="text-align: right;">-0.0252668</td>
+<td style="text-align: right;">0.3671218</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state2</td>
+<td style="text-align: right;">0.0684861</td>
+<td style="text-align: right;">0.0169507</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state20</td>
+<td style="text-align: right;">0.0404206</td>
+<td style="text-align: right;">0.1372089</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state21</td>
+<td style="text-align: right;">0.0844661</td>
+<td style="text-align: right;">0.0046554</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state22</td>
+<td style="text-align: right;">0.0776116</td>
+<td style="text-align: right;">0.0018439</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state23</td>
+<td style="text-align: right;">0.1504249</td>
+<td style="text-align: right;">0.0000064</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state24</td>
+<td style="text-align: right;">0.0516181</td>
+<td style="text-align: right;">0.0710322</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state25</td>
+<td style="text-align: right;">0.0368543</td>
+<td style="text-align: right;">0.1278354</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state26</td>
+<td style="text-align: right;">0.1672622</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state27</td>
+<td style="text-align: right;">0.1087814</td>
+<td style="text-align: right;">0.0000572</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state28</td>
+<td style="text-align: right;">0.0190234</td>
+<td style="text-align: right;">0.4682370</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state29</td>
+<td style="text-align: right;">0.0213463</td>
+<td style="text-align: right;">0.4155569</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state30</td>
+<td style="text-align: right;">0.0842804</td>
+<td style="text-align: right;">0.0014026</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state31</td>
+<td style="text-align: right;">-0.0141975</td>
+<td style="text-align: right;">0.6047729</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state32</td>
+<td style="text-align: right;">0.0527446</td>
+<td style="text-align: right;">0.0609939</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state33</td>
+<td style="text-align: right;">0.0932025</td>
+<td style="text-align: right;">0.0006465</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state34</td>
+<td style="text-align: right;">0.0089603</td>
+<td style="text-align: right;">0.7353492</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state35</td>
+<td style="text-align: right;">0.0783037</td>
+<td style="text-align: right;">0.0044830</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state36</td>
+<td style="text-align: right;">0.0250150</td>
+<td style="text-align: right;">0.2685223</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state37</td>
+<td style="text-align: right;">0.0548678</td>
+<td style="text-align: right;">0.0262696</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state38</td>
+<td style="text-align: right;">-0.0580145</td>
+<td style="text-align: right;">0.0249017</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state39</td>
+<td style="text-align: right;">0.0066973</td>
+<td style="text-align: right;">0.7769694</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state4</td>
+<td style="text-align: right;">0.0557463</td>
+<td style="text-align: right;">0.0350604</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state40</td>
+<td style="text-align: right;">-0.0240233</td>
+<td style="text-align: right;">0.3834526</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state41</td>
+<td style="text-align: right;">0.1861741</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state42</td>
+<td style="text-align: right;">0.1144093</td>
+<td style="text-align: right;">0.0000006</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state44</td>
+<td style="text-align: right;">0.0449238</td>
+<td style="text-align: right;">0.1493347</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state45</td>
+<td style="text-align: right;">0.0470293</td>
+<td style="text-align: right;">0.0825738</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state46</td>
+<td style="text-align: right;">0.0451325</td>
+<td style="text-align: right;">0.1175156</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state47</td>
+<td style="text-align: right;">-0.0448754</td>
+<td style="text-align: right;">0.0800934</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state48</td>
+<td style="text-align: right;">-0.0183647</td>
+<td style="text-align: right;">0.3770879</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state49</td>
+<td style="text-align: right;">-0.0050743</td>
+<td style="text-align: right;">0.8426844</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state5</td>
+<td style="text-align: right;">-0.0061017</td>
+<td style="text-align: right;">0.8126704</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state50</td>
+<td style="text-align: right;">0.1207567</td>
+<td style="text-align: right;">0.0000082</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state51</td>
+<td style="text-align: right;">0.0225358</td>
+<td style="text-align: right;">0.3823434</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state53</td>
+<td style="text-align: right;">0.0831668</td>
+<td style="text-align: right;">0.0009053</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state54</td>
+<td style="text-align: right;">-0.0312421</td>
+<td style="text-align: right;">0.2233112</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state55</td>
+<td style="text-align: right;">0.1214253</td>
+<td style="text-align: right;">0.0000042</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state56</td>
+<td style="text-align: right;">-0.0204226</td>
+<td style="text-align: right;">0.4461240</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state6</td>
+<td style="text-align: right;">0.0340504</td>
+<td style="text-align: right;">0.0890532</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">state8</td>
+<td style="text-align: right;">0.1523204</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">state9</td>
+<td style="text-align: right;">-0.0085000</td>
+<td style="text-align: right;">0.7749159</td>
 </tr>
 </tbody>
 </table>
@@ -1909,7 +2160,7 @@ I will first perform an exploratory data analysis. I will then run a regression 
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span><span class='va'>income_group_turnout_plot</span></span>
-<span><span class='va'>lm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_type</span> <span class='op'>+</span> <span class='va'>house_income_num</span> <span class='op'>+</span> <span class='va'>college_degree</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='va'>lm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_type</span> <span class='op'>+</span> <span class='va'>house_income_num</span> <span class='op'>+</span> <span class='va'>college_degree</span> <span class='op'>+</span> <span class='va'>state</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>lm</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
@@ -1942,15 +2193,10 @@ I will first perform an exploratory data analysis. I will then run a regression 
 change income to log?
 how do i explain p values produced by regression?
 should I create confidence intervals based on difference in turnout?
-how do I incoporate state into regression?</p>
+how do I incorporate state into regression?</p>
 <p>footnote: I combined self-employed classes</p>
 <p>Later: talk about internal validity (survey method, randomization, social desirability bias)</p>
-<p>I am interested in studying the effect of one’s mode—or “class”—of work on their democratic participation. Respondents to the U.S. Census Bureau’s most recent Current Population Survey Voting Supplement indicated their “employment class”, broadly one of two categories: employment by a nonprofit entity versus a forprofit entity. Nonprofit entities include the government and regular nonprofit organizations. Forprofit entities include most employers (retail, manafacturing, etc.) as well as the self-employed. Does working for the government increase your ability and/or your willingness to participate? I measure participation through respondents’ turnout rates in the most recent national elections (2022), as reported in the survey. A regression analysis reveals that yes, indeed, working for a nonprofit entity is associated with greater turnout: workers at nonprofits turned out a rate 12.38% higher than workers at forprofits. I also explored the influence of one’s household income on their turnout, assuming that income is a possible confounder: working at a forprofit could be associated with a lower income, and a lower income could be associated with a lower turnout. Income would be driving the difference in turnout between employment classes, then. I confirmed that lower income is associated with lower turnout by calculating the 2022 turnout rates of respondents belonging to various income groups ranging from below 15,000 dollars to above 150,000 dollars, data available in the same census survey (see Visualization section). The regression analysis offered further confirmation: a one dollar increase in annual household income was associated with 0.0002307% increase in turnout in 2022. I also confirmed that workers at forprofit entities receive lower incomes by comparing the average household incomes of nonprofit and forprofit workers: forprofit workers receive an average household income that is $6581.92 lower than what nonprofit workers receive. Therefore it is likely that household income is interfering with the effect of employment class. Naturally, my next step is to compare turnout rates across employment classes <strong>within</strong> income groups.</p>
-<h1 id="milestone-2">Milestone 2</h1>
-<p>Does one’s class of work affect their degree of democratic participation? I plan to investigate how work conditions influence the ability or willingness of workers to vote. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed and (2) work less hours. Proximity to politics can inspire or pressure one to participate. A less demanding work schedule allows one the time needed to engage in politics. I expect to find, therefore, that government and non-profit employees and the self-employed participate the most: government and non-profit employees due to their proximity to politics, and the self-employed due to their control over their schedules. In election years, the Current Population Survey conducted by the U.S. Census Bureau asks tens of thousands of Americans whether or not they voted in the most recent national election. The latest edition of the survey, based on the 2022 elections, features 264,707,835 responses. On top of vote status, the survey asks respondents to report their “class” of work, one of six categories: employment by (1) the federal government, (2) a state government, (3) a local government, (4) a private for-profit company, (5) a private non-profit entity, or (6) no one (i.e., self-employed). I can compare the turnout rates of each group in the 2022 national elections to determine which participated the most. In other words, the explanatory variable of interest is “class” of work as defined by the Census Bureau and the outcome variable of interest is whether or not the respondent voted (coded “1” for voted and “2” for not voted in the dataset). If my hypothesis is correct, I will observe that workers of classes 1, 2, 3, and 5 (government and non-profit employees) and 6 (the self-employed) turned out to vote at the highest rates in 2022. Workers of class 4 (for-profit employees), who are by far the largest group in the dataset, will have turned out the least.</p>
-<p>Link to the dataset: <a href="https://data.census.gov/mdat/#/search?ds=CPSVOTING202211&amp;cv=HEFAMINC,PES1&amp;rv=PEIO1COW&amp;wt=HWHHWGT" class="uri">https://data.census.gov/mdat/#/search?ds=CPSVOTING202211&amp;cv=HEFAMINC,PES1&amp;rv=PEIO1COW&amp;wt=HWHHWGT</a></p>
-<h1 id="project-thoughts-milestone-1">Project thoughts (Milestone 1)</h1>
-<p>I am interested in exploring the impact of British Commonwealth membership on political attitudes, nationalism, and democratic participation. Do citizens of countries that remove the Monarch as their head of state develop a greater sense of national pride and therefore a greater desire to participate politically? I can measure this using voter turnout rates and surveys of populations that have experienced such a transition.</p>
+<p>the explanatory variable of interest is “class” of work as defined by the Census Bureau and the outcome variable of interest is whether or not the respondent voted (coded “1” for voted and “2” for not voted in the dataset)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
