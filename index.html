@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["census.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-4-2.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.21/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","nov22pub (1).csv"]}
+  {"type":"character","attributes":{},"value":["census.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-10-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-4-2.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-5-2.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.21/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1498,6 +1498,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="index_files/header-attrs-2.25/header-attrs.js"></script>
+  <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
+  <link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   <script src="index_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
   <script src="index_files/popper-2.6.0/popper.min.js"></script>
   <link href="index_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
@@ -1545,7 +1547,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="d-article">
 <p>Is one’s ability or willingness to participate in democracy affected by where they work? This project examines the relationship between democratic participation and “employment class” as defined by the United States Census Bureau. The Bureau divides American workplaces into six classes: federal government, state government, local government, private for-profit, private non-profit, and self-employed. It sorts respondents to its monthly Current Population Survey into one of the six classes, on top of asking each about their voting history, household income, education level, location, and more. The most recent survey asks 126,097 respondents whether or not they voted in the 2022 national elections; I leverage the resulting estimated turnout rates as a measure of democratic participation. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed, (2) have more control over their schedules, and/or (3) benefit from workplace autonomy. The first because proximity to politics can inspire or pressure one to participate. The second because greater control over one’s schedule enables them to carve out time for political activities like rallies and voting. And the third because democratic theory literature suggests a relationship between autonomy in the workplace—that is, the ability of workers to dialogue and collaborate with bosses to shape their work experience and the direction of the organization—and participation in the polity: autonomous workers develop useful decision making and information processing tools and a sense of agency that carry over from the workplace to the political realm.</p>
 <p>In light of my hypothesis, I expect to find that workers for the government, non-profits, and the self-employed participate the most, while workers for for-profits participate the least. Government workplaces are proximate to politics in the sense that their mandates and directives are directly determined through the political process. Their bosses are or are appointed by politicians. Their day-to-day work experiences are shaped by politics so they are likely invested in political decision making. Those who are self-employed set their own work hours and can therefore carve out the time needed for political activity such as voting. Non-profit workplaces are often small, meaning workers have more opportunities to directly interface with decision makers. For-profit workplaces are often large and hierarchical; average workers have little opportunity to shape the direction of the company and limited control over their schedules, and may or may not be close to the political process.</p>
-<p>A broad pattern emerges from my hypothesis: I have predicted that workers for entities that are not companies (the government, non-profits, and the self-employed) will participate the most, while workers for companies (for-profits) will participate the least. To operationalize and test this hypothesis, I combine the six classes into two employment “types”: <em>“non-company”</em> and <em>“company”</em>. I include the self-employed in the “non-company” type because while they may helm a company, they do not work <em>for</em> a company, making them unique from employees for for-profits. I am thus essentially isolating and comparing the experience of working for a company to working for other kinds of entities. My hypothesis will be supported if I discover that workers at non-companies turned out at a greater rate than those at companies in 2022. I am comfortable using voter turnout as a measure of democratic participation because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote <em>and</em> engage in other democratic activities such as attending rallies.</p>
+<p>I am broadly predicting that workers for for-profits participate less than workers for the other classes. To operationalize this hypothesis for the purpose of regression analysis, I combine the six classes into two employment “types”: <em>“for-profit”</em> and <em>“other”</em>. I have identified unique features of the classes in the “other” category that I predict are conducive to participation, but have not proposed a shared feature that justifies their collation as one type. For that reason, I will continue to display results for both the broad types and the granular classes throughout the project. If I find that the classes in the “other” category are very similar in their propensity to participate, I will explore more deeply possible connections between them. My hypothesis will be supported if I discover that workers at for-profits turned out a lesser rate than workers for the other classes in 2022. I am comfortable using voter turnout as a measure of democratic participation because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote <em>and</em> engage in other democratic activities such as attending rallies.</p>
 <p>I will first perform an exploratory data analysis. I will then run a regression analysis to discover the relationship between employment type and participation. I will conclude by discussing my findings and their interpretation, as well as potential flaws in the method and next steps. All code used to prepare/manipulate the data and produce the outputs can be found at the very bottom of the site.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1554,7 +1556,50 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 </div>
 <h1 id="exploratory-data-analysis">Exploratory data analysis</h1>
-<p>proportions of each class in the dataset</p>
+<p>First, where do most Americans work? Which class is the largest? I calculate the proportions of each class in the sample.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">employment_class</th>
+<th style="text-align: right;">Number</th>
+<th style="text-align: right;">Proportion (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Federal gov’t</td>
+<td style="text-align: right;">1141</td>
+<td style="text-align: right;">3.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">For-profit</td>
+<td style="text-align: right;">24916</td>
+<td style="text-align: right;">65.91</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Local gov’t</td>
+<td style="text-align: right;">2585</td>
+<td style="text-align: right;">6.84</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-profit</td>
+<td style="text-align: right;">2884</td>
+<td style="text-align: right;">7.63</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Self-employed</td>
+<td style="text-align: right;">4222</td>
+<td style="text-align: right;">11.17</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">State gov’t</td>
+<td style="text-align: right;">2054</td>
+<td style="text-align: right;">5.43</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>I am first interested in gauging which group recorded a higher turnout rate in 2022. I will start by calculating turnout rates for each of the two employment type categories, then will break the nonprofit category down and calculate the rates for each of the five employment classes. I will visualize both sets of rates as barplots, and conclude by calculating the differences in turnout rates to estimate the effect of employment type on one’s electoral participation.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
@@ -1566,12 +1611,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Company</td>
+<td style="text-align: left;">For-profit</td>
 <td style="text-align: right;">56.92</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Non-company</td>
-<td style="text-align: right;">72.93</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">72.47</td>
 </tr>
 </tbody>
 </table>
@@ -1588,7 +1633,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <td style="text-align: right;">70.03</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">For profit</td>
+<td style="text-align: left;">For-profit</td>
 <td style="text-align: right;">56.92</td>
 </tr>
 <tr class="odd">
@@ -1596,10 +1641,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <td style="text-align: right;">74.97</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Non profit</td>
+<td style="text-align: left;">Non-profit</td>
 <td style="text-align: right;">71.29</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Self-employed</td>
+<td style="text-align: right;">71.51</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">State gov’t</td>
 <td style="text-align: right;">74.29</td>
 </tr>
@@ -1607,7 +1656,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </table>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-4-2.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-5-2.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <table>
@@ -1618,32 +1667,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">16.01072</td>
+<td style="text-align: right;">15.54</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Those who work at a non-company turned out at a rate 16.01% higher than those working at a company in 2022. Workers for the federal government, state government, local government and nonprofits all turned out at rates higher than 70%, meanwhile workers at forprofit companies turned out at a rate of 57%. This suggests that there is something unique about working at a forprofit company that inhibits one’s ability or willingness to participate in elections. Every other kind of worker participates much more.</p>
+<p>Those who work at a non-company turned out at a rate 15.54% higher than those working at a company in 2022. Workers for the federal government, state government, local government, and nonprofits and the self-employed all turned out at rates higher than 70%, meanwhile workers at forprofit companies turned out at a rate of 57%. This suggests that there is something unique about working at a forprofit company that inhibits one’s ability or willingness to participate in elections. Every other kind of worker participates much more.</p>
 <p>An important feature of one’s employment is their wage or salary. Income could have something to do with the observed effect, especially if one group receives a higher income than the other. I first calculate and compare the average annual household incomes of the two types, those who work for a company and those who work for a non-company.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: right;">Company</th>
-<th style="text-align: right;">Non-company</th>
+<th style="text-align: right;">For-profit</th>
+<th style="text-align: right;">Other</th>
 <th style="text-align: right;">difference</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">91538.02</td>
-<td style="text-align: right;">98563.74</td>
-<td style="text-align: right;">7025.72</td>
+<td style="text-align: right;">97265.35</td>
+<td style="text-align: right;">5727.33</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Those who work at non-companies made on average $7025.72 more in 2022 than those who work at companies. It could be that making a higher income drives one’s ability or willingness to participate in elections, since the same people who make the highest incomes are the ones who turnout to vote at the highest rates. To explore the relationship between income and turnout, I calculate and plot the turnout rates of each annual household income group in 2022.</p>
+<p>Those who work at non-companies made on average $5727.33 more in 2022 than those who work at companies. It could be that making a higher income drives one’s ability or willingness to participate in elections, since the same people who make the highest incomes are the ones who turnout to vote at the highest rates. To explore the relationship between income and turnout, I calculate and plot the turnout rates of each annual household income group in 2022.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <thead>
@@ -1655,320 +1704,970 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">150,000 or more</td>
-<td style="text-align: right;">74.33</td>
+<td style="text-align: right;">75.09</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">100,000 to 149,999</td>
-<td style="text-align: right;">68.18</td>
+<td style="text-align: right;">68.87</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">60,000 to 99,999</td>
-<td style="text-align: right;">59.70</td>
+<td style="text-align: right;">61.06</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">35,000 to 59,999</td>
-<td style="text-align: right;">49.60</td>
+<td style="text-align: right;">51.20</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">15,000 to 34,999</td>
-<td style="text-align: right;">42.65</td>
+<td style="text-align: right;">44.36</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Below 15,000</td>
-<td style="text-align: right;">39.03</td>
+<td style="text-align: right;">40.10</td>
 </tr>
 </tbody>
 </table>
-<p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-8-1.png" width="624" /></p>
 </div>
 <p>It seems as though income is related to turnout: the highest income groups turnout the most, and the lowest income groups turnout the least.</p>
 <p>In light of the likely relationship between income and turnout, I run a regression analysis to assess the relationship between employment type and turnout holding income constant.</p>
 <div class="layout-chunk" data-layout="l-body">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">p.value</th>
+<tr>
+<th style="text-align:left;">
+term
+</th>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+p.value
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">0.2907956</td>
-<td style="text-align: right;">0.0000000</td>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+0.3082837
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">employment_typeNon-company</td>
-<td style="text-align: right;">0.1075944</td>
-<td style="text-align: right;">0.0000000</td>
+<tr>
+<td style="text-align:left;">
+employment_typeOther
+</td>
+<td style="text-align:right;">
+0.1105248
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">house_income_num</td>
-<td style="text-align: right;">0.0000017</td>
-<td style="text-align: right;">0.0000000</td>
+<tr>
+<td style="text-align:left;">
+house_income_num
+</td>
+<td style="text-align:right;">
+0.0000016
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">college_degree</td>
-<td style="text-align: right;">0.1771950</td>
-<td style="text-align: right;">0.0000000</td>
+<tr>
+<td style="text-align:left;">
+college_degree
+</td>
+<td style="text-align:right;">
+0.1772133
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state10</td>
-<td style="text-align: right;">0.0267060</td>
-<td style="text-align: right;">0.3883737</td>
+<tr>
+<td style="text-align:left;">
+state10
+</td>
+<td style="text-align:right;">
+0.0260078
+</td>
+<td style="text-align:right;">
+0.3778270
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state11</td>
-<td style="text-align: right;">0.0289727</td>
-<td style="text-align: right;">0.2558304</td>
+<tr>
+<td style="text-align:left;">
+state11
+</td>
+<td style="text-align:right;">
+0.0359800
+</td>
+<td style="text-align:right;">
+0.1361939
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state12</td>
-<td style="text-align: right;">0.0622373</td>
-<td style="text-align: right;">0.0046037</td>
+<tr>
+<td style="text-align:left;">
+state12
+</td>
+<td style="text-align:right;">
+0.0502092
+</td>
+<td style="text-align:right;">
+0.0149836
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state13</td>
-<td style="text-align: right;">0.1190345</td>
-<td style="text-align: right;">0.0000035</td>
+<tr>
+<td style="text-align:left;">
+state13
+</td>
+<td style="text-align:right;">
+0.1143603
+</td>
+<td style="text-align:right;">
+0.0000020
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state15</td>
-<td style="text-align: right;">0.0071089</td>
-<td style="text-align: right;">0.7991329</td>
+<tr>
+<td style="text-align:left;">
+state15
+</td>
+<td style="text-align:right;">
+0.0926487
+</td>
+<td style="text-align:right;">
+0.0009400
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state16</td>
-<td style="text-align: right;">-0.0814083</td>
-<td style="text-align: right;">0.0016121</td>
+<tr>
+<td style="text-align:left;">
+state16
+</td>
+<td style="text-align:right;">
+-0.0812467
+</td>
+<td style="text-align:right;">
+0.0007474
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state17</td>
-<td style="text-align: right;">0.0497394</td>
-<td style="text-align: right;">0.0331085</td>
+<tr>
+<td style="text-align:left;">
+state17
+</td>
+<td style="text-align:right;">
+0.0426141
+</td>
+<td style="text-align:right;">
+0.0528442
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state18</td>
-<td style="text-align: right;">-0.0621759</td>
-<td style="text-align: right;">0.0163355</td>
+<tr>
+<td style="text-align:left;">
+state18
+</td>
+<td style="text-align:right;">
+-0.0703131
+</td>
+<td style="text-align:right;">
+0.0042403
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state19</td>
-<td style="text-align: right;">-0.0252668</td>
-<td style="text-align: right;">0.3671218</td>
+<tr>
+<td style="text-align:left;">
+state19
+</td>
+<td style="text-align:right;">
+-0.0357583
+</td>
+<td style="text-align:right;">
+0.1758735
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state2</td>
-<td style="text-align: right;">0.0684861</td>
-<td style="text-align: right;">0.0169507</td>
+<tr>
+<td style="text-align:left;">
+state2
+</td>
+<td style="text-align:right;">
+0.0842150
+</td>
+<td style="text-align:right;">
+0.0021786
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state20</td>
-<td style="text-align: right;">0.0404206</td>
-<td style="text-align: right;">0.1372089</td>
+<tr>
+<td style="text-align:left;">
+state20
+</td>
+<td style="text-align:right;">
+0.0487851
+</td>
+<td style="text-align:right;">
+0.0544000
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state21</td>
-<td style="text-align: right;">0.0844661</td>
-<td style="text-align: right;">0.0046554</td>
+<tr>
+<td style="text-align:left;">
+state21
+</td>
+<td style="text-align:right;">
+0.0812858
+</td>
+<td style="text-align:right;">
+0.0037968
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state22</td>
-<td style="text-align: right;">0.0776116</td>
-<td style="text-align: right;">0.0018439</td>
+<tr>
+<td style="text-align:left;">
+state22
+</td>
+<td style="text-align:right;">
+0.0698173
+</td>
+<td style="text-align:right;">
+0.0028543
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state23</td>
-<td style="text-align: right;">0.1504249</td>
-<td style="text-align: right;">0.0000064</td>
+<tr>
+<td style="text-align:left;">
+state23
+</td>
+<td style="text-align:right;">
+0.1356919
+</td>
+<td style="text-align:right;">
+0.0000074
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state24</td>
-<td style="text-align: right;">0.0516181</td>
-<td style="text-align: right;">0.0710322</td>
+<tr>
+<td style="text-align:left;">
+state24
+</td>
+<td style="text-align:right;">
+0.0589186
+</td>
+<td style="text-align:right;">
+0.0296728
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state25</td>
-<td style="text-align: right;">0.0368543</td>
-<td style="text-align: right;">0.1278354</td>
+<tr>
+<td style="text-align:left;">
+state25
+</td>
+<td style="text-align:right;">
+0.0379571
+</td>
+<td style="text-align:right;">
+0.0967209
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state26</td>
-<td style="text-align: right;">0.1672622</td>
-<td style="text-align: right;">0.0000000</td>
+<tr>
+<td style="text-align:left;">
+state26
+</td>
+<td style="text-align:right;">
+0.1643597
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state27</td>
-<td style="text-align: right;">0.1087814</td>
-<td style="text-align: right;">0.0000572</td>
+<tr>
+<td style="text-align:left;">
+state27
+</td>
+<td style="text-align:right;">
+0.1118034
+</td>
+<td style="text-align:right;">
+0.0000093
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state28</td>
-<td style="text-align: right;">0.0190234</td>
-<td style="text-align: right;">0.4682370</td>
+<tr>
+<td style="text-align:left;">
+state28
+</td>
+<td style="text-align:right;">
+0.0164877
+</td>
+<td style="text-align:right;">
+0.5064720
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state29</td>
-<td style="text-align: right;">0.0213463</td>
-<td style="text-align: right;">0.4155569</td>
+<tr>
+<td style="text-align:left;">
+state29
+</td>
+<td style="text-align:right;">
+0.0178190
+</td>
+<td style="text-align:right;">
+0.4711883
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state30</td>
-<td style="text-align: right;">0.0842804</td>
-<td style="text-align: right;">0.0014026</td>
+<tr>
+<td style="text-align:left;">
+state30
+</td>
+<td style="text-align:right;">
+0.0844429
+</td>
+<td style="text-align:right;">
+0.0004812
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state31</td>
-<td style="text-align: right;">-0.0141975</td>
-<td style="text-align: right;">0.6047729</td>
+<tr>
+<td style="text-align:left;">
+state31
+</td>
+<td style="text-align:right;">
+-0.0172569
+</td>
+<td style="text-align:right;">
+0.5027167
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state32</td>
-<td style="text-align: right;">0.0527446</td>
-<td style="text-align: right;">0.0609939</td>
+<tr>
+<td style="text-align:left;">
+state32
+</td>
+<td style="text-align:right;">
+0.0630457
+</td>
+<td style="text-align:right;">
+0.0173646
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state33</td>
-<td style="text-align: right;">0.0932025</td>
-<td style="text-align: right;">0.0006465</td>
+<tr>
+<td style="text-align:left;">
+state33
+</td>
+<td style="text-align:right;">
+0.0932586
+</td>
+<td style="text-align:right;">
+0.0002559
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state34</td>
-<td style="text-align: right;">0.0089603</td>
-<td style="text-align: right;">0.7353492</td>
+<tr>
+<td style="text-align:left;">
+state34
+</td>
+<td style="text-align:right;">
+0.0152748
+</td>
+<td style="text-align:right;">
+0.5419202
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state35</td>
-<td style="text-align: right;">0.0783037</td>
-<td style="text-align: right;">0.0044830</td>
+<tr>
+<td style="text-align:left;">
+state35
+</td>
+<td style="text-align:right;">
+0.0864241
+</td>
+<td style="text-align:right;">
+0.0008375
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state36</td>
-<td style="text-align: right;">0.0250150</td>
-<td style="text-align: right;">0.2685223</td>
+<tr>
+<td style="text-align:left;">
+state36
+</td>
+<td style="text-align:right;">
+0.0374179
+</td>
+<td style="text-align:right;">
+0.0789770
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state37</td>
-<td style="text-align: right;">0.0548678</td>
-<td style="text-align: right;">0.0262696</td>
+<tr>
+<td style="text-align:left;">
+state37
+</td>
+<td style="text-align:right;">
+0.0572344
+</td>
+<td style="text-align:right;">
+0.0140241
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state38</td>
-<td style="text-align: right;">-0.0580145</td>
-<td style="text-align: right;">0.0249017</td>
+<tr>
+<td style="text-align:left;">
+state38
+</td>
+<td style="text-align:right;">
+-0.0566303
+</td>
+<td style="text-align:right;">
+0.0201549
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state39</td>
-<td style="text-align: right;">0.0066973</td>
-<td style="text-align: right;">0.7769694</td>
+<tr>
+<td style="text-align:left;">
+state39
+</td>
+<td style="text-align:right;">
+0.0007383
+</td>
+<td style="text-align:right;">
+0.9736509
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state4</td>
-<td style="text-align: right;">0.0557463</td>
-<td style="text-align: right;">0.0350604</td>
+<tr>
+<td style="text-align:left;">
+state4
+</td>
+<td style="text-align:right;">
+0.0573401
+</td>
+<td style="text-align:right;">
+0.0212228
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state40</td>
-<td style="text-align: right;">-0.0240233</td>
-<td style="text-align: right;">0.3834526</td>
+<tr>
+<td style="text-align:left;">
+state40
+</td>
+<td style="text-align:right;">
+-0.0022135
+</td>
+<td style="text-align:right;">
+0.9319097
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state41</td>
-<td style="text-align: right;">0.1861741</td>
-<td style="text-align: right;">0.0000000</td>
+<tr>
+<td style="text-align:left;">
+state41
+</td>
+<td style="text-align:right;">
+0.1885418
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state42</td>
-<td style="text-align: right;">0.1144093</td>
-<td style="text-align: right;">0.0000006</td>
+<tr>
+<td style="text-align:left;">
+state42
+</td>
+<td style="text-align:right;">
+0.1009856
+</td>
+<td style="text-align:right;">
+0.0000033
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state44</td>
-<td style="text-align: right;">0.0449238</td>
-<td style="text-align: right;">0.1493347</td>
+<tr>
+<td style="text-align:left;">
+state44
+</td>
+<td style="text-align:right;">
+0.0401749
+</td>
+<td style="text-align:right;">
+0.1689532
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state45</td>
-<td style="text-align: right;">0.0470293</td>
-<td style="text-align: right;">0.0825738</td>
+<tr>
+<td style="text-align:left;">
+state45
+</td>
+<td style="text-align:right;">
+0.0366310
+</td>
+<td style="text-align:right;">
+0.1522458
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state46</td>
-<td style="text-align: right;">0.0451325</td>
-<td style="text-align: right;">0.1175156</td>
+<tr>
+<td style="text-align:left;">
+state46
+</td>
+<td style="text-align:right;">
+0.0286701
+</td>
+<td style="text-align:right;">
+0.2841584
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state47</td>
-<td style="text-align: right;">-0.0448754</td>
-<td style="text-align: right;">0.0800934</td>
+<tr>
+<td style="text-align:left;">
+state47
+</td>
+<td style="text-align:right;">
+-0.0475783
+</td>
+<td style="text-align:right;">
+0.0482529
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state48</td>
-<td style="text-align: right;">-0.0183647</td>
-<td style="text-align: right;">0.3770879</td>
+<tr>
+<td style="text-align:left;">
+state48
+</td>
+<td style="text-align:right;">
+-0.0192995
+</td>
+<td style="text-align:right;">
+0.3247029
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state49</td>
-<td style="text-align: right;">-0.0050743</td>
-<td style="text-align: right;">0.8426844</td>
+<tr>
+<td style="text-align:left;">
+state49
+</td>
+<td style="text-align:right;">
+0.0014997
+</td>
+<td style="text-align:right;">
+0.9504232
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state5</td>
-<td style="text-align: right;">-0.0061017</td>
-<td style="text-align: right;">0.8126704</td>
+<tr>
+<td style="text-align:left;">
+state5
+</td>
+<td style="text-align:right;">
+-0.0105776
+</td>
+<td style="text-align:right;">
+0.6618910
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state50</td>
-<td style="text-align: right;">0.1207567</td>
-<td style="text-align: right;">0.0000082</td>
+<tr>
+<td style="text-align:left;">
+state50
+</td>
+<td style="text-align:right;">
+0.1269353
+</td>
+<td style="text-align:right;">
+0.0000004
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state51</td>
-<td style="text-align: right;">0.0225358</td>
-<td style="text-align: right;">0.3823434</td>
+<tr>
+<td style="text-align:left;">
+state51
+</td>
+<td style="text-align:right;">
+0.0298630
+</td>
+<td style="text-align:right;">
+0.2183182
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state53</td>
-<td style="text-align: right;">0.0831668</td>
-<td style="text-align: right;">0.0009053</td>
+<tr>
+<td style="text-align:left;">
+state53
+</td>
+<td style="text-align:right;">
+0.0997702
+</td>
+<td style="text-align:right;">
+0.0000256
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state54</td>
-<td style="text-align: right;">-0.0312421</td>
-<td style="text-align: right;">0.2233112</td>
+<tr>
+<td style="text-align:left;">
+state54
+</td>
+<td style="text-align:right;">
+-0.0384099
+</td>
+<td style="text-align:right;">
+0.1131007
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state55</td>
-<td style="text-align: right;">0.1214253</td>
-<td style="text-align: right;">0.0000042</td>
+<tr>
+<td style="text-align:left;">
+state55
+</td>
+<td style="text-align:right;">
+0.1179706
+</td>
+<td style="text-align:right;">
+0.0000023
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state56</td>
-<td style="text-align: right;">-0.0204226</td>
-<td style="text-align: right;">0.4461240</td>
+<tr>
+<td style="text-align:left;">
+state56
+</td>
+<td style="text-align:right;">
+-0.0260440
+</td>
+<td style="text-align:right;">
+0.2975490
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state6</td>
-<td style="text-align: right;">0.0340504</td>
-<td style="text-align: right;">0.0890532</td>
+<tr>
+<td style="text-align:left;">
+state6
+</td>
+<td style="text-align:right;">
+0.0560597
+</td>
+<td style="text-align:right;">
+0.0031685
+</td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">state8</td>
-<td style="text-align: right;">0.1523204</td>
-<td style="text-align: right;">0.0000000</td>
+<tr>
+<td style="text-align:left;">
+state8
+</td>
+<td style="text-align:right;">
+0.1530150
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">state9</td>
-<td style="text-align: right;">-0.0085000</td>
-<td style="text-align: right;">0.7749159</td>
+<tr>
+<td style="text-align:left;">
+state9
+</td>
+<td style="text-align:right;">
+-0.0075526
+</td>
+<td style="text-align:right;">
+0.7867315
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sexmale
+</td>
+<td style="text-align:right;">
+-0.0084654
+</td>
+<td style="text-align:right;">
+0.0737433
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race10
+</td>
+<td style="text-align:right;">
+-0.1689894
+</td>
+<td style="text-align:right;">
+0.0896252
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race11
+</td>
+<td style="text-align:right;">
+-0.2485661
+</td>
+<td style="text-align:right;">
+0.0292929
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race12
+</td>
+<td style="text-align:right;">
+-0.5499776
+</td>
+<td style="text-align:right;">
+0.0159488
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race13
+</td>
+<td style="text-align:right;">
+0.4639689
+</td>
+<td style="text-align:right;">
+0.1501507
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race14
+</td>
+<td style="text-align:right;">
+-0.1608270
+</td>
+<td style="text-align:right;">
+0.5412374
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race15
+</td>
+<td style="text-align:right;">
+-0.0290103
+</td>
+<td style="text-align:right;">
+0.7062344
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race16
+</td>
+<td style="text-align:right;">
+-0.2396863
+</td>
+<td style="text-align:right;">
+0.0303177
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race17
+</td>
+<td style="text-align:right;">
+-0.1970120
+</td>
+<td style="text-align:right;">
+0.5411593
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race18
+</td>
+<td style="text-align:right;">
+0.3645018
+</td>
+<td style="text-align:right;">
+0.1661902
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race19
+</td>
+<td style="text-align:right;">
+0.2487716
+</td>
+<td style="text-align:right;">
+0.2227341
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race2
+</td>
+<td style="text-align:right;">
+-0.0009132
+</td>
+<td style="text-align:right;">
+0.9140619
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race20
+</td>
+<td style="text-align:right;">
+-0.0862141
+</td>
+<td style="text-align:right;">
+0.6729858
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race21
+</td>
+<td style="text-align:right;">
+-0.1388518
+</td>
+<td style="text-align:right;">
+0.1539566
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race23
+</td>
+<td style="text-align:right;">
+0.4534540
+</td>
+<td style="text-align:right;">
+0.3198381
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race26
+</td>
+<td style="text-align:right;">
+-0.0553344
+</td>
+<td style="text-align:right;">
+0.7867932
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race3
+</td>
+<td style="text-align:right;">
+-0.0830239
+</td>
+<td style="text-align:right;">
+0.0003583
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race4
+</td>
+<td style="text-align:right;">
+-0.1731058
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race5
+</td>
+<td style="text-align:right;">
+-0.1444724
+</td>
+<td style="text-align:right;">
+0.0000705
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race6
+</td>
+<td style="text-align:right;">
+-0.1531348
+</td>
+<td style="text-align:right;">
+0.0000065
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race7
+</td>
+<td style="text-align:right;">
+-0.0198172
+</td>
+<td style="text-align:right;">
+0.5358129
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race8
+</td>
+<td style="text-align:right;">
+-0.0275349
+</td>
+<td style="text-align:right;">
+0.4062561
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+race9
+</td>
+<td style="text-align:right;">
+-0.0797128
+</td>
+<td style="text-align:right;">
+0.3416465
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+ (1)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Annual household income
+</td>
+<td style="text-align:center;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.000)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Worker has college degree
+</td>
+<td style="text-align:center;">
+0.177
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1.5px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1.5px">
+(0.005)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+37802
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.119
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.117
+</td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>I further illustrate the effect of employment type on turnout holding income constant by calculating and visualizing the turnout rates of each type within income groups.</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="index_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
 </div>
 <p>Within each income group, workers at non-companies turnout more than workers at companies.</p>
 <h1 id="code">Code</h1>
@@ -1979,9 +2678,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span></span>
 <span><span class='co'>#loading data and selecting variables</span></span>
 <span></span>
-<span><span class='va'>census_raw</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"nov22pub (1).csv"</span><span class='op'>)</span></span>
+<span><span class='co'>#census_raw &lt;- read_csv("nov22pub (1).csv")</span></span>
 <span><span class='co'>#census &lt;- census_raw |&gt;</span></span>
-<span>  <span class='co'>#select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC, education=PEEDUCA, state=GESTFIPS)</span></span>
+<span>  <span class='co'>#select(employment_class=PEIO1COW, voted=PES1, income_code=HEFAMINC, education=PEEDUCA, state=GESTFIPS, sex=PESEX, race=PTDTRACE)</span></span>
 <span><span class='co'>#write.csv(census,"census.csv")</span></span>
 <span></span>
 <span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"census.csv"</span><span class='op'>)</span></span>
@@ -1993,8 +2692,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"Federal gov't"</span>,</span>
 <span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"State gov't"</span>,</span>
 <span>             <span class='fl'>3</span> <span class='op'>~</span> <span class='st'>"Local gov't"</span>, </span>
-<span>             <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"For profit"</span>,</span>
-<span>             <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"Non profit"</span>,</span>
+<span>             <span class='fl'>4</span> <span class='op'>~</span> <span class='st'>"For-profit"</span>,</span>
+<span>             <span class='fl'>5</span> <span class='op'>~</span> <span class='st'>"Non-profit"</span>,</span>
+<span>             <span class='fl'>6</span> <span class='op'>~</span> <span class='st'>"Self-employed"</span>,</span>
+<span>             <span class='fl'>7</span> <span class='op'>~</span> <span class='st'>"Self-employed"</span>,</span>
 <span>             .default <span class='op'>=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
 <span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>employment_class</span> <span class='op'>!=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
@@ -2002,8 +2703,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='co'>#creating binary employment type variable </span></span>
 <span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>employment_type <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span></span>
-<span>    <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Federal gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"State gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Local gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Non profit"</span> <span class='op'>~</span> <span class='st'>"Non-company"</span>,</span>
-<span>    <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"For profit"</span> <span class='op'>~</span> <span class='st'>"Company"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>    <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Federal gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"State gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Local gov't"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Non-profit"</span> <span class='op'>|</span> <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"Self-employed"</span> <span class='op'>~</span> <span class='st'>"Other"</span>,</span>
+<span>    <span class='va'>employment_class</span> <span class='op'>==</span> <span class='st'>"For-profit"</span> <span class='op'>~</span> <span class='st'>"For-profit"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'>#numeric voted variable</span></span>
 <span><span class='va'>census</span><span class='op'>$</span><span class='va'>voted_num</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>voted</span> <span class='op'>|&gt;</span></span>
@@ -2018,6 +2719,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='co'>#filtering out others</span></span>
 <span><span class='va'>census</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>voted</span> <span class='op'>!=</span> <span class='st'>"other"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>#adjusting sex variable</span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>sex</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>sex</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"male"</span>,</span>
+<span>             <span class='fl'>2</span> <span class='op'>~</span> <span class='st'>"female"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>census</span><span class='op'>$</span><span class='va'>race</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>census</span><span class='op'>$</span><span class='va'>race</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>census</span><span class='op'>$</span><span class='va'>house_income</span> <span class='op'>&lt;-</span> <span class='va'>census</span><span class='op'>$</span><span class='va'>income_code</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_match.html'>case_match</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>1</span> <span class='op'>~</span> <span class='st'>"other"</span>,</span>
@@ -2092,6 +2800,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>    <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"associate degree vocational"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"associate degree academic"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"bachelor's degree"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"master's degree"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"professional degree"</span> <span class='op'>|</span> <span class='va'>education</span> <span class='op'>==</span> <span class='st'>"doctorate degree"</span> <span class='op'>~</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>census</span><span class='op'>$</span><span class='va'>state</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>census</span><span class='op'>$</span><span class='va'>state</span><span class='op'>)</span></span>
+<span><span class='va'>census</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_class</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>Number <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>`Proportion (%)` <span class='op'>=</span> <span class='va'>Number</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>Number</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>100</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
 <span><span class='co'>#calculating turnout rates by employment type</span></span>
 <span><span class='va'>employment_type_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
@@ -2108,7 +2821,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>employment_type</span>, y <span class='op'>=</span> <span class='va'>turnout</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>    title <span class='op'>=</span> <span class='st'>"Relationship Between Employment Type and Electoral Participation"</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"Relationship Between Employment Type and Democratic Participation"</span>,</span>
 <span>    x <span class='op'>=</span> <span class='st'>"Employment type"</span>,</span>
 <span>    y <span class='op'>=</span> <span class='st'>"Turnout (%) in 2022 national elections"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span></span>
@@ -2120,7 +2833,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_flip.html'>coord_flip</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>    title <span class='op'>=</span> <span class='st'>"Relationship Between Employment Class and Electoral Participation"</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"Relationship Between Employment Class and Democratic Participation"</span>,</span>
 <span>    x <span class='op'>=</span> <span class='st'>"Employment class"</span>,</span>
 <span>    y <span class='op'>=</span> <span class='st'>"Turnout (%) in 2022 national elections"</span>,</span>
 <span>    caption <span class='op'>=</span> <span class='st'>"Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government (U.S. Census Bureau). Self-employed not included."</span></span>
@@ -2133,15 +2846,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='va'>diff_in_type_rates</span> <span class='op'>&lt;-</span> <span class='va'>employment_type_turnout</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>employment_type</span>,</span>
 <span>              values_from <span class='op'>=</span> <span class='va'>turnout</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>difference <span class='op'>=</span> <span class='va'>`Non-company`</span> <span class='op'>-</span> <span class='va'>Company</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>difference <span class='op'>=</span> <span class='va'>Other</span> <span class='op'>-</span> <span class='va'>`For-profit`</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>difference</span><span class='op'>)</span></span>
-<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>diff_in_type_rates</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>diff_in_type_rates</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
 <span><span class='va'>type_income_average</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_type</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>`Average household income` <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>house_income_num</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/pivot_wider.html'>pivot_wider</a></span><span class='op'>(</span>names_from <span class='op'>=</span> <span class='va'>employment_type</span>,</span>
 <span>              values_from <span class='op'>=</span> <span class='va'>`Average household income`</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>difference <span class='op'>=</span> <span class='va'>`Non-company`</span> <span class='op'>-</span> <span class='va'>Company</span><span class='op'>)</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>difference <span class='op'>=</span> <span class='va'>Other</span> <span class='op'>-</span> <span class='va'>`For-profit`</span><span class='op'>)</span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>type_income_average</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span>
 <span><span class='va'>income_group_turnout</span> <span class='op'>&lt;-</span> <span class='va'>census</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>broad_income_categories</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
@@ -2160,12 +2873,25 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span><span class='va'>income_group_turnout_plot</span></span>
-<span><span class='va'>lm</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_type</span> <span class='op'>+</span> <span class='va'>house_income_num</span> <span class='op'>+</span> <span class='va'>college_degree</span> <span class='op'>+</span> <span class='va'>state</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://modelsummary.com'>modelsummary</a></span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>lm</span> <span class='op'>|&gt;</span></span>
+<span><span class='va'>lm1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_type</span> <span class='op'>+</span> <span class='va'>house_income_num</span> <span class='op'>+</span> <span class='va'>college_degree</span> <span class='op'>+</span> <span class='va'>state</span> <span class='op'>+</span> <span class='va'>sex</span> <span class='op'>+</span> <span class='va'>race</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>lm2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>voted_num</span> <span class='op'>~</span> <span class='va'>employment_class</span>, data <span class='op'>=</span> <span class='va'>census</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>lm1</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'>broom</span><span class='fu'>::</span><span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span>, <span class='va'>p.value</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
 <span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>var_labels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span>  <span class='st'>"employment_typeNon-company"</span> <span class='op'>=</span> <span class='st'>"Workers at non-companies"</span>,</span>
+<span>  <span class='st'>"house_income_num"</span> <span class='op'>=</span> <span class='st'>"Annual household income"</span>,</span>
+<span>  <span class='st'>"college_degree"</span> <span class='op'>=</span> <span class='st'>"Worker has college degree"</span><span class='op'>)</span></span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>lm1</span><span class='op'>)</span>,</span>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span>,</span>
+<span>                           coef_map <span class='op'>=</span> <span class='va'>var_labels</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='co'>#calculating turnout rates of employment types within income groups</span></span>
 <span></span>
@@ -2189,11 +2915,13 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 <h2 id="milestones">Milestones</h2>
 <h1 id="milestones-3-and-4">Milestones 3 and 4</h1>
-<p>questions:
-change income to log?
-how do i explain p values produced by regression?
+<p>questions:</p>
+<p>how do i explain p values produced by regression?
 should I create confidence intervals based on difference in turnout?
-how do I incorporate state into regression?</p>
+when I’m calculating something like proportions of each class… should I run some sort of test to confirm those proportions? Can I go ahead and say that these are the proportions we are working with in the general U.S. population?</p>
+<p>how should i display regression model output? is knitr kable function ok? Modelsummary? Stargazer?</p>
+<p>non profits CAN BE COMPANIES!!!</p>
+<p>update to include self-employed.</p>
 <p>footnote: I combined self-employed classes</p>
 <p>Later: talk about internal validity (survey method, randomization, social desirability bias)</p>
 <p>the explanatory variable of interest is “class” of work as defined by the Census Bureau and the outcome variable of interest is whether or not the respondent voted (coded “1” for voted and “2” for not voted in the dataset)</p>
