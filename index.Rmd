@@ -7,17 +7,10 @@ output:
     self_contained: false
 ---
 
-Is one's ability or willingness to participate in democracy affected by where they work? This project examines the relationship between democratic participation and "employment class" as defined by the United States Census Bureau. The Bureau divides American workplaces into six classes: federal government, state government, local government, private for-profit, private non-profit, and self-employed. It sorts respondents to its monthly Current Population Survey into one of the six classes, on top of asking each about their voting history, household income, education level, location, and more. The most recent survey asks 126,097 respondents whether or not they voted in the 2022 national elections; I leverage the resulting estimated turnout rates as a measure of democratic participation. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed, (2) have more control over their schedules, and/or (3) benefit from workplace autonomy. The first because proximity to politics can inspire or pressure one to participate. The second because greater control over one's schedule enables them to carve out time for political activities like rallies and voting. And the third because democratic theory literature suggests a relationship between autonomy in the workplace---that is, the ability of workers to dialogue and collaborate with bosses to shape their work experience and the direction of the organization---and participation in the polity: autonomous workers develop useful decision making and information processing tools and a sense of agency that carry over from the workplace to the political realm. 
-
-In light of my hypothesis, I expect to find that workers for the government, non-profits, and the self-employed participate the most, while workers for for-profits participate the least. Government workplaces are proximate to politics in the sense that their mandates and directives are directly determined through the political process. Their bosses are or are appointed by politicians. Their day-to-day work experiences are shaped by politics so they are likely invested in political decision making. Those who are self-employed set their own work hours and can therefore carve out the time needed for political activity such as voting. Non-profit workplaces are often small, meaning workers have more opportunities to directly interface with decision makers. For-profit workplaces are often large and hierarchical; average workers have little opportunity to shape the direction of the company and limited control over their schedules, and may or may not be close to the political process. 
-
-I am broadly predicting that workers for for-profits participate less than workers for the other classes. To operationalize this hypothesis for the purpose of regression analysis, I combine the six classes into two employment "types": *"for-profit"* and *"other"*. I have identified unique features of the classes in the "other" category that I predict are conducive to participation, but have not proposed a shared feature that justifies their collation as one type. For that reason, I will continue to display results for both the broad types and the granular classes throughout the project. If I find that the classes in the "other" category are very similar in their propensity to participate, I will explore more deeply possible connections between them. My hypothesis will be supported if I discover that workers at for-profits turned out a lesser rate than workers for the other classes in 2022. I am comfortable using voter turnout as a measure of democratic participation because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote *and* engage in other democratic activities such as attending rallies.  
-
-I will first perform an exploratory data analysis. I will then run a regression analysis to discover the relationship between employment type and participation. I will conclude by discussing my findings and their interpretation, as well as potential flaws in the method and next steps. All code used to prepare/manipulate the data and produce the outputs can be found at the very bottom of the site. 
-
 ```{r, echo=FALSE}
 library(tidyverse)
 library(stringr)
+library(dplyr)
 
 #loading data and selecting variables
 
@@ -71,8 +64,6 @@ census$sex <- census$sex |>
   case_match(1 ~ "male",
              2 ~ "female")
 
-census$race <- as.character(census$race)
-
 census$house_income <- census$income_code |>
   case_match(-1 ~ "other",
              1 ~ "less than 5",
@@ -93,6 +84,7 @@ census$house_income <- census$income_code |>
              16 ~ "150 or more")
 census <- census |>
   filter(house_income != "other")
+
 #broadening above household income categories
 census <- census |>
   mutate(broad_income_categories = case_when(
@@ -102,6 +94,7 @@ census <- census |>
     income_code >= 13 & income_code <= 14 ~ "60,000 to 99,999",
     income_code == 15 ~ "100,000 to 149,999",
     income_code == 16 ~ "150,000 or more"))
+
 #creating numeric household income variable by taking average of upper/lower house_income bounds
 census$house_income_num <- census$income_code |>
   case_match(1 ~ 2500,
@@ -146,7 +139,125 @@ census <- census |>
     education == "associate degree vocational" | education == "associate degree academic" | education == "bachelor's degree" | education == "master's degree" | education == "professional degree" | education == "doctorate degree" ~ 1))
 
 census$state <- as.character(census$state)
+census$employment_class <- as.factor(census$employment_class)
+
+census$race <- census$race |>
+  case_match(1 ~ "White",
+             2 ~ "Black",
+             3 ~ "American Indian", 
+             4 ~ "Asian",
+             5 ~ "Hawaiian/Pacific Islander",
+             .default = "Mixed")
+
 ```
+
+# Section 1
+
+Is one's ability or willingness to participate in democracy affected by where they work? This project examines the relationship between democratic participation and "employment class" as defined by the United States Census Bureau. The Bureau divides American workplaces into six classes: federal government, state government, local government, private for-profit, private non-profit, and self-employed. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed, (2) have more control over their schedules, and/or (3) benefit from workplace autonomy. The first because proximity to politics can inspire or pressure one to participate. The second because greater control over one's schedule enables them to carve out time for political activities like rallies and voting. And the third because the democratic theory literature suggests a relationship between autonomy in the workplace---that is, the ability of workers to dialogue and collaborate with bosses to shape their work experience and the direction of the organization---and participation in the polity: autonomous workers develop useful decision making and information processing tools and a sense of agency that carry over from the workplace to the political realm. 
+
+Thus, I expect to find that workers for the government, non-profits, and the self-employed participate the most, while workers for for-profits participate the least. Government workplaces are proximate to politics in the sense that their mandates and directives are directly determined through the political process. Their bosses are or are appointed by politicians. Their day-to-day work experiences are shaped by politics so they are likely invested in political decision making. Those who are self-employed set their own work hours and can therefore carve out the time needed for political activity such as voting. Non-profit workplaces are often small, meaning workers have more opportunities to directly interface with decision makers. For-profit workplaces are often large and hierarchical; average workers have little opportunity to shape the direction of the company and limited control over their schedules, and may or may not be close to the political process. 
+
+Learning about the work conditions favorable to democratic participation can inform national- and state-level labor policies. Governments should want to encourage participation among citizens. 
+
+# Section 2
+
+Respondents to the Census Bureau's monthly Current Population Survey are asked to identify themselves as one of the six classes of workers and report their voting history, household income, education level, location, and more. The most recent survey asked 126,097 respondents whether or not they voted in the 2022 national elections. To test my hypothesis, I compare the 2022 turnout rates of each class, controlling for potential confounders such as income and education level. My hypothesis will be supported if I discover that workers at for-profits turned out a lower rate than workers for the other classes in 2022. I use voter turnout as a measure of democratic participation on the whole because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote *and* engage in other democratic activities such as attending rallies.
+
+The code that I used to prepare the data (import, wrangle, etc.) can be found at the bottom of the site. 
+
+First, I calculate the proportions of each group in the survey sample. 
+
+```{r}
+census |>
+  group_by(employment_class) |>
+  summarize(Number = n()) |>
+  mutate(`Proportion (%)` = Number / sum(Number) * 100) |>
+  knitr::kable(digits = 2)
+```
+For-profit employees make up the vast majority of the sample (67%). This is consistent with the Bureau of Labor Statistics' projection that 71% of all U.S. workers work for for-profit firms. Thus, inferences about for-profit employees are relevant to a large portion of Americans. 
+
+An initial plot of the dependent variable (2022 voter turnout) reveals that, indeed, turnout differs significantly across classes. In particular, government and non-profit employees and the self-employed turned out at a similar rate (above 70%), a rate much higher than that of for-profit employees (57%). 
+
+```{r}
+#calculating turnout rates by employment class
+employment_class_turnout <- census |>
+  group_by(employment_class) |>
+  summarize(turnout = mean(voted_num) * 100)
+knitr::kable(employment_class_turnout, digits = 2)
+
+#plotting turnout rates by employment class
+employment_class_turnout_plot <- employment_class_turnout |>
+  ggplot(mapping = aes(x = fct_reorder(employment_class, turnout), y = turnout)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Employment Class and Democratic Participation",
+    x = "Employment class",
+    y = "Turnout (%) in 2022 national elections",
+    caption = "Note: Employment Class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government (U.S. Census Bureau). Self-employed not included."
+  ) +
+  theme_classic() +
+  theme(plot.margin = margin(b = 10))
+wrapped_caption <- str_wrap("Note: Employment Class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government (U.S. Census Bureau). Self-employed not included.", width = 112)
+employment_class_turnout_plot <- employment_class_turnout_plot + labs(caption = wrapped_caption)
+employment_class_turnout_plot
+```
+
+# Section 3
+
+An initial visualization of 2022 turnout rates suggests a different in rates across classes. To explore this relationship, I conduct a regression analysis of turnout rates on employment class, controlling for a number of potential confounders. 
+
+
+```{r}
+library(modelsummary)
+
+census$employment_class <- relevel(census$employment_class, ref = "For-profit")
+
+lm1 <- summary(lm(voted_num ~ employment_class + house_income_num + college_degree + state + sex + race, data = census))
+
+lm2 <- summary(lm(voted_num ~ employment_class, data = census))
+
+var_labels <- c(
+  "employment_classFederal gov't"  = "Federal gov't",
+  "employment_classLocal gov't" = "Local gov't",
+  "employment_classNon-profit" = "Non-profit",
+  "employment_classSelf-employed" = "Self-employed",
+  "employment_classState gov't" = "State gov't",
+  "house_income_num" = "Annual household income",
+  "college_degree" = "College degree",
+  "sex" = "Sex",
+  "raceHawaiian/Pacific Islander" = "Race: Hawaiian/Pacific Islander",
+  "raceWhite" = "Race: White",
+  "raceBlack" = "Race: Black",
+  "raceMixed" = "Race: Mixed",
+  "raceAsian" = "Race: Asian")
+
+modelsummary::modelsummary(list(lm1, lm2),
+                           gof_map = c("nobs", 
+                                       "r.squared", 
+                                       "adj.r.squared"),
+                           statistic = c("s.e. = {std.error}",
+                                         "p = {p.value}"),
+                           coef_map = var_labels,
+                           note = "State covariate included in analysis but omitted from table",
+                           stars = TRUE)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Exploratory data analysis
 
@@ -258,23 +369,27 @@ In light of the likely relationship between income and turnout, I run a regressi
 ```{r, echo=FALSE}
 library(modelsummary)
 
-lm1 <- summary(lm(voted_num ~ employment_type + house_income_num + college_degree + state + sex + race, data = census))
+census$employment_class <- relevel(census$employment_class, ref = "For-profit")
+
+lm1 <- summary(lm(voted_num ~ employment_class + house_income_num + college_degree + state + sex + race, data = census))
 
 lm2 <- summary(lm(voted_num ~ employment_class, data = census))
 
-lm1 |>
-  broom::tidy() |>
-  select(term, estimate, p.value) |> 
-  knitr::kable()
-
-
 var_labels <- c(
-  "employment_typeNon-company" = "Workers at non-companies",
-  "house_income_num" = "Annual household income",
-  "college_degree" = "Worker has college degree")
-modelsummary::modelsummary(list(lm1),
+  "employment_classFederal gov't"  = "Federal gov't",
+  "employment_classLocal gov't" = "Local gov't",
+  "employment_classNon-profit" = "Non-profit",
+  "employment_classSelf-employed" = "Self-employed",
+  "employment_classState gov't" = "State gov't")
+modelsummary::modelsummary(list(lm1, lm2),
                            gof_map = c("nobs", "r.squared", "adj.r.squared"),
-                           coef_map = var_labels)
+                           coef_map = var_labels,
+                           statistic = "std.error",
+                           stars = TRUE,
+                           notes = "Household income, college degree, state, sex, and race variables are factored into model 1 but are omitted from the table.")
+
+
+
 
 ```
 
