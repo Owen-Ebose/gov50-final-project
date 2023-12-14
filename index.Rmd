@@ -153,17 +153,17 @@ census$race <- census$race |>
 
 # Section 1
 
-Is one's ability or willingness to participate in democracy affected by where they work? This project examines the relationship between democratic participation and "employment class" as defined by the United States Census Bureau. The Bureau divides American workplaces into six classes: federal government, state government, local government, private for-profit, private non-profit, and self-employed. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed, (2) have more control over their schedules, and/or (3) benefit from workplace autonomy. The first because proximity to politics can inspire or pressure one to participate. The second because greater control over one's schedule enables them to carve out time for political activities like rallies and voting. And the third because the democratic theory literature suggests a relationship between autonomy in the workplace---that is, the ability of workers to dialogue and collaborate with bosses to shape their work experience and the direction of the organization---and participation in the polity: autonomous workers develop useful decision making and information processing tools and a sense of agency that carry over from the workplace to the political realm. 
+Is one's ability or willingness to participate in democracy affected by where they work? This project examines the relationship between democratic participation and "employment class" as defined by the United States Census Bureau. The Bureau divides American workplaces into six classes: federal government, state government, local government, private for-profit, private non-profit, and self-employed. I hypothesize that those who are the most inclined to participate (1) work in settings where politics are involved or discussed, (2) have more control over their schedules, and/or (3) benefit from workplace autonomy. The first because proximity to politics can inspire or pressure one to participate. The second because greater control over one's schedule enables them to carve out time for political activities like rallies and voting. And the third because the democratic theory literature suggests a relationship between autonomy in the workplace---that is, the ability of workers to dialogue and collaborate with bosses to shape their work experience and the direction of the organization---and participation in the polity: autonomous workers develop useful decision making and information processing tools and a sense of agency that carry over from the workplace to the political realm (Pateman 1970). 
 
-Thus, I expect to find that workers for the government, non-profits, and the self-employed participate the most, while workers for for-profits participate the least. Government workplaces are proximate to politics in the sense that their mandates and directives are directly determined through the political process. Their bosses are or are appointed by politicians. Their day-to-day work experiences are shaped by politics so they are likely invested in political decision making. Those who are self-employed set their own work hours and can therefore carve out the time needed for political activity such as voting. Non-profit workplaces are often small, meaning workers have more opportunities to directly interface with decision makers. For-profit workplaces are often large and hierarchical; average workers have little opportunity to shape the direction of the company and limited control over their schedules, and may or may not be close to the political process. 
+Thus, I expect to find that workers for the government, non-profits, and the self-employed participate the most, while workers for for-profits participate the least. Government workplaces are proximate to politics in the sense that their mandates and directives are directly determined through the political process. Their bosses are or are appointed by politicians. Their day-to-day work experiences are shaped by politics so they are likely invested in political decision making. Those who are self-employed set their own work hours and can therefore carve out the time needed for political activity such as voting. Non-profit workplaces are often small, meaning workers have more opportunities to directly interface with decision makers (Bureau of Labor Statistics). For-profit workplaces are often large and hierarchical; average workers have little opportunity to shape the direction of the company and limited control over their schedules, and may or may not be close to the political process (Francis 2017). 
 
 Learning about the work conditions favorable to democratic participation can inform national- and state-level labor policies. Governments should want to encourage participation among citizens. 
 
 # Section 2
 
-Respondents to the Census Bureau's monthly Current Population Survey are asked to identify themselves as one of the six classes of workers and report their voting history, household income, education level, location, and more. The most recent survey asked 126,097 respondents whether or not they voted in the 2022 national elections. To test my hypothesis, I compare the 2022 turnout rates of each class, controlling for potential confounders such as income and education level. My hypothesis will be supported if I discover that workers at for-profits turned out a lower rate than workers for the other classes in 2022. I use voter turnout as a measure of democratic participation on the whole because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote *and* engage in other democratic activities such as attending rallies.
+Respondents to the Census Bureau's monthly Current Population Survey are asked to identify themselves as one of the six classes of workers, as well as report their voting history, household income, education level, location, and more. The most recent survey asked 126,097 respondents whether or not they voted in the 2022 national elections. To test my hypothesis, I compare the 2022 turnout rates of each class, controlling for potential confounders such as income and education level. My hypothesis will be supported if I discover that workers at for-profits turned out a lower rate than workers for the other classes in 2022. I use voter turnout as a measure of democratic participation on the whole because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote *and* engage in other democratic activities such as attending rallies.
 
-The code that I used to prepare the data (import, wrangle, etc.) can be found at the bottom of the site. 
+This is a cross-sectional research design wherein I observe turnout estimates across multiple categorical groups at a single point in time, 2022. **The code that I used to prepare the data (import, wrangle, etc.) can be found at the bottom of the site.** 
 
 First, I calculate the proportions of each group in the survey sample. 
 
@@ -205,7 +205,7 @@ employment_class_turnout_plot
 
 # Section 3
 
-An initial visualization of 2022 turnout rates suggests a different in rates across classes. To explore this relationship, I conduct a regression analysis of turnout rates on employment class, controlling for a number of potential confounders. Those confounders are the respondent's annual household income, whether or not they have a college degree, which state they live in, their sex, and their race. Each is associated with election turnout and could be associated with employment class (some classes of workers could receive higher incomes than  other classes, and higher income is associated with higher turnout (the same goes for college education); some states feature more contested elections and hence higher voter turnout, and those states could be host to a higher proportion of a particular class of worker; there could be a higher proportion of one sex or race in a given class, and members of particular sexes and races turn out to vote at a higher rate). 
+An initial visualization of 2022 turnout rates suggests a different in rates across classes. To explore this relationship, I conduct a regression analysis of turnout rates on employment class, controlling for a number of potential confounders. Those confounders are the respondent's annual household income, whether or not they have a college degree, which state they live in, their sex, and their race. Each is associated with election turnout and could be associated with employment class: some classes of workers could receive higher incomes than  other classes, and higher income is associated with higher turnout (the same goes for college education); some states feature more contested elections and hence higher voter turnout, and those states could be host to a higher proportion of a particular class of worker; there could be a higher proportion of one sex or race in a given class, and members of particular sexes and races turn out to vote at higher rates. 
 
 ```{r}
 library(modelsummary)
@@ -243,7 +243,9 @@ modelsummary::modelsummary(list(lm2, lm1),
 
 ```
 
-Model 1 does not control for confounders. Model 2 does. Both models suggest a clear and statistically significant relationship between turnout and employment class, although the estimated effect is attenuated when controlling for confounders. The baseline group is for-profit employees. Thus, the coefficients for each class represent the difference in turnouts between that class and for-profit employees. Controlling for confounders, federal government employees turned out at a rate 7.1 percentage points higher than for-profit employees in 2022; state government employees turned out at a rate 12 percentage points higher; local government employees turned out a rate 13.1 percentage points higher; workers for non-profits turned out at a rate 8.2 percentage points higher; and the self-employed turned out at a rate 12.3 percentage points higher. The p-value for each  coefficient is below 0.001, meaning there is less than a 0.1% chance that the coefficients would be observed under a null hypothesis that there is no difference in turnout rates between the classes. Thus, we can reject the null, and consider the results statistically significant. 
+Model 1 does not control for confounders. Model 2 does. Both models suggest a clear and statistically significant relationship between turnout and employment class, although the estimated effect is attenuated when controlling for confounders. The baseline group is for-profit employees. Thus, the coefficients for each class represent the difference in turnouts between that class and for-profit employees. Controlling for confounders, federal government employees turned out at a rate 7.1 percentage points higher than for-profit employees in 2022; state government employees turned out at a rate 12 percentage points higher; local government employees turned out a rate 13.1 percentage points higher; workers for non-profits turned out at a rate 8.2 percentage points higher; and the self-employed turned out at a rate 12.3 percentage points higher. The p-value for each  coefficient is below 0.001, meaning there is less than a 0.1% chance that the coefficients would be observed under a null hypothesis that there is no difference in turnout rates between the classes. Thus, we can reject the null, and consider the results statistically significant.
+
+Interestingly, the estimated effect of annual household income on turnout is zero. Meanwhile, the estimated effect of college education---17.8%---is larger than that of belonging to any of the classes. You would expect that a major mechanism through which college education has any impact on one's life experience is increasing their income. The fact that income is a non-factor according to these estimates underlies the effect of knowledge on participation: receiving an education increases one's knowledge, and having more knowledge could increase one's ability or willingness to participate in elections. Elections could be more accessible to those who have thought about civic issues in school. If this interpretation of the estimates is correct, the value of workplace autonomy would be underscored: more autonomy in the workplace endows workers with more knowledge about decision making, finance, and more; that knowledge could be an important factor in their choosing to vote in elections.  
 
 I now visualize the coefficients with 95% confidence intervals. 
 
@@ -268,210 +270,36 @@ lm1tidy |>
 
 ```
 
-Working for a local government is associated with the greatest increase in turnout, followed by being self-employed, working for a state government, working for a non-profit, then working for the federal government. None of the 95% confidence intervals contain zero, so, in line with our conclusion based on the p-values, we can conclude that the coefficients are significantly different from zero at the five percent level.
+Working for a local government is associated with the greatest increase in turnout, followed by being self-employed, working for a state government, working for a non-profit, then working for the federal government. None of the 95% confidence intervals contain zero (none cross the dotted line), so, in accord with our conclusion based on the p-values, we can conclude that the coefficients are significantly different from zero at the five percent level. Considering that we controlled for the most prominent confounders, that the estimates are statistically significant, and the sample is randomly selected and representative of the general U.S. population, I am comfortable interpreting these results causally, i.e., concluding that belonging to a certain employment class cause one's turnout to increase or decrease, depending on the class. 
 
+I test the representativeness of the sample by calculating two basic descriptive statistics:
 
-
-
-
-
-
-
-
-
-
-
-
-
-# Exploratory data analysis
-
-First, where do most Americans work? Which class is the largest? I calculate the proportions of each class in the sample.
-
-```{r, echo=FALSE}
+```{r}
 census |>
-  group_by(employment_class) |>
+  group_by(race) |>
   summarize(Number = n()) |>
   mutate(`Proportion (%)` = Number / sum(Number) * 100) |>
   knitr::kable(digits = 2)
 ```
 
-
-I am first interested in gauging which group recorded a higher turnout rate in 2022. I will start by calculating turnout rates for each of the two employment type categories, then will break the nonprofit category down and calculate the rates for each of the five employment classes. I will visualize both sets of rates as barplots, and conclude by calculating the differences in turnout rates to estimate the effect of employment type on one's electoral participation. 
-
-```{r, echo=FALSE}
-#calculating turnout rates by employment type
-employment_type_turnout <- census |>
-  group_by(employment_type) |>
-  summarize(turnout = mean(voted_num) * 100)
-knitr::kable(employment_type_turnout, digits = 2)
-
-#calculating turnout rates by employment class
-employment_class_turnout <- census |>
-  group_by(employment_class) |>
-  summarize(turnout = mean(voted_num) * 100)
-knitr::kable(employment_class_turnout, digits = 2)
+```{r}
+census |>
+  group_by(sex) |>
+  summarize(Number = n()) |>
+  mutate(`Proportion (%)` = Number / sum(Number) * 100) |>
+  knitr::kable(digits = 2)
 ```
+These race and gender breakdowns are consistent with other Census Bureau surveys.
 
-```{r, echo=FALSE}
-#plotting turnout rates by employment type
-employment_type_turnout_plot <- employment_type_turnout |>
-  ggplot(mapping = aes(x = employment_type, y = turnout)) +
-  geom_col() +
-  labs(
-    title = "Relationship Between Employment Type and Democratic Participation",
-    x = "Employment type",
-    y = "Turnout (%) in 2022 national elections") +
-  theme_classic()
-employment_type_turnout_plot
+# Section 4
 
-#plotting turnout rates by employment class
-employment_class_turnout_plot <- employment_class_turnout |>
-  ggplot(mapping = aes(x = fct_reorder(employment_class, turnout), y = turnout)) +
-  geom_col() +
-  coord_flip() +
-  labs(
-    title = "Relationship Between Employment Class and Democratic Participation",
-    x = "Employment class",
-    y = "Turnout (%) in 2022 national elections",
-    caption = "Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government (U.S. Census Bureau). Self-employed not included."
-  ) +
-  theme_classic() +
-  theme(plot.margin = margin(b = 10))
-wrapped_caption <- str_wrap("Note: Employment class categorizes workers according to the type of ownership of the employing organization. This variable identifies whether the respondent is self-employed, works in the private sector, or in government (U.S. Census Bureau). Self-employed not included.", width = 112)
-employment_class_turnout_plot <- employment_class_turnout_plot + labs(caption = wrapped_caption)
-employment_class_turnout_plot
-```
+In this project, I discovered that there is a statistically significant relationship between one's employment class and their democratic participation, measured through 2022 voter turnout rates. I confirmed my hypothesis that government and non-profit employees and the self-employed participate the most, while employees at for-profits participate the least; controlling for potential confounders, for-profit employees turned out at least 7.1 percentage points lower than any of the other classes. One potential threat to a causal interpretation of this result is social desirability bias: respondents to the Current Population Survey could have reported that they voted when they really did not, since voting is socially desirable. I am not worried by this threat, however, since I assume that each of the groups I am comparing are subject to to the same level of social desirability bias, and thus are still comparable. The fact that the sample is randomly selected (from the United States Postal Service Master Address File---a list of all U.S. permanent addresses), and is thus representative of the general U.S. population, is an important indication of the design's internal validity. The major threat to inference I am left concerned about is non-response bias: the original sample contained 126,097 respondents; after filtering out those who did not report their employment class or voting history, I was left with 37,802 respondents. That is a 70% decrease in sample size. I am worried that a certain kind of person chose not to report their class and voting history, and that that kind of person is associated with one class or another---especially when dealing with issues of apathy. Say, for example, local government employees are the most apathetic; their apathy could lead them to leave survey questions blank and also to not vote. Our sample would be left only with the most enthusiastic local government employees who chose to complete the full survey and vote. Thus, while it would look like local government employees vote at a higher rate than for-profit employees, the general population of local government employees could actually be the least involved---which would be revealed if the a representative sample of such employees were studied. There is no way for me to account for this kind of potential bias within the scope of this project. My analysis could be improved by collecting qualitative data---perhaps through interviews---that evaluates the mechanisms I proposed in the introduction. I would ask members of each class *why* they do or do not vote. Then I would gain an insight into why it is that for-profit employees participate the least while the others participate more. 
 
-```{r, echo=FALSE}
-diff_in_type_rates <- employment_type_turnout |>
-  pivot_wider(names_from = employment_type,
-              values_from = turnout) |>
-  mutate(difference = Other - `For-profit`) |>
-  select(difference)
-knitr::kable(diff_in_type_rates, digits = 2)
-```
-Those who work at a non-company turned out at a rate 15.54% higher than those working at a company in 2022. Workers for the federal government, state government, local government, and nonprofits and the self-employed all turned out at rates higher than 70%, meanwhile workers at forprofit companies turned out at a rate of 57%. This suggests that there is something unique about working at a forprofit company that inhibits one's ability or willingness to participate in elections. Every other kind of worker participates much more. 
+# Sources
 
-An important feature of one's employment is their wage or salary. Income could have something to do with the observed effect, especially if one group receives a higher income than the other. I first calculate and compare the average annual household incomes of the two types, those who work for a company and those who work for a non-company. 
-
-```{r, echo=FALSE}
-type_income_average <- census |>
-  group_by(employment_type) |>
-  summarize(`Average household income` = mean(house_income_num)) |>
-  pivot_wider(names_from = employment_type,
-              values_from = `Average household income`) |>
-  mutate(difference = Other - `For-profit`)
-knitr::kable(type_income_average, digits = 2)
-```
-
-Those who work at non-companies made on average $5727.33 more in 2022 than those who work at companies. It could be that making a higher income drives one's ability or willingness to participate in elections, since the same people who make the highest incomes are the ones who turnout to vote at the highest rates. To explore the relationship between income and turnout, I calculate and plot the turnout rates of each annual household income group in 2022. 
-
-```{r, echo=FALSE}
-income_group_turnout <- census |>
-  group_by(broad_income_categories) |>
-  summarize(turnout = mean(voted_num) * 100)
-income_group_turnout <- arrange(income_group_turnout, desc(turnout))
-knitr::kable(income_group_turnout, digits = 2)
-
-income_group_turnout_plot <- income_group_turnout |>
-  ggplot(mapping = aes(x = fct_reorder(broad_income_categories, turnout), y = turnout)) +
-  geom_col() +
-  coord_flip() +
-  labs(
-    title = "Relationship between annual household income and electoral participation",
-    x = "Annual household income (in thousands of dollars)",
-    y = "Turnout (%) in 2022 national nlections"
-  ) +
-  theme_classic()
-income_group_turnout_plot
-```
-
-It seems as though income is related to turnout: the highest income groups turnout the most, and the lowest income groups turnout the least. 
-
-In light of the likely relationship between income and turnout, I run a regression analysis to assess the relationship between employment type and turnout holding income constant. 
-
-```{r, echo=FALSE}
-library(modelsummary)
-
-census$employment_class <- relevel(census$employment_class, ref = "For-profit")
-
-lm1 <- summary(lm(voted_num ~ employment_class + house_income_num + college_degree + state + sex + race, data = census))
-
-lm2 <- summary(lm(voted_num ~ employment_class, data = census))
-
-var_labels <- c(
-  "employment_classFederal gov't"  = "Federal gov't",
-  "employment_classLocal gov't" = "Local gov't",
-  "employment_classNon-profit" = "Non-profit",
-  "employment_classSelf-employed" = "Self-employed",
-  "employment_classState gov't" = "State gov't")
-modelsummary::modelsummary(list(lm1, lm2),
-                           gof_map = c("nobs", "r.squared", "adj.r.squared"),
-                           coef_map = var_labels,
-                           statistic = "std.error",
-                           stars = TRUE,
-                           notes = "Household income, college degree, state, sex, and race variables are factored into model 1 but are omitted from the table.")
-
-
-
-
-```
-
-I further illustrate the effect of employment type on turnout holding income constant by calculating and visualizing the turnout rates of each type within income groups. 
-
-```{r, echo=FALSE}
-#calculating turnout rates of employment types within income groups
-
-type_income_turnout <- census |>
-  group_by(broad_income_categories, employment_type) |>
-  summarize(turnout = mean(voted_num) *100)
-
-custom_levels <- c("150,000 or more","100,000 to 149,999","60,000 to 99,999", "35,000 to 59,999", "15,000 to 34,999", "Below 15,000")
-type_income_turnout$broad_income_categories <- factor(type_income_turnout$broad_income_categories, levels = custom_levels)
-
-type_income_turnout_plot <- type_income_turnout |>
-  ggplot(aes(x = factor(turnout), y = turnout, fill = employment_type)) +
-    geom_col() +
-    facet_wrap(~broad_income_categories, ncol = 3, scales = "free_x", drop = TRUE) +
-    theme(
-        axis.text.x = element_blank(),
-        axis.ticks.x = element_blank()) +
-  labs(title = "By annual household income group (in thousands of dollars)", x = NULL, y = "Turnout (%) in 2022 national elections")
-type_income_turnout_plot
-
-```
-
-Within each income group, workers at non-companies turnout more than workers at companies.
-
-# Code
-
-```{r print-code, ref.label=knitr::all_labels(), echo = TRUE, eval=FALSE}
-
-```
-
-## Milestones
-
-# Milestones 3 and 4
-
-
-
-questions:
-
-how do i explain p values produced by regression?
-should I create confidence intervals based on difference in turnout?
-when I'm calculating something like proportions of each class... should I run some sort of test to confirm those proportions? Can I go ahead and say that these are the proportions we are working with in the general U.S. population?
-
-
-how should i display regression model output? is knitr kable function ok? Modelsummary? Stargazer?
-
-non profits CAN BE COMPANIES!!!
-
-update to include self-employed.
-
-footnote: I combined self-employed classes
-
-
-
-Later: talk about internal validity (survey method, randomization, social desirability bias)
-
-the explanatory variable of interest is "class" of work as defined by the Census Bureau and the outcome variable of interest is whether or not the respondent voted (coded "1" for voted and "2" for not voted in the dataset)
+Francis, Theo. “Why Americans Are More Likely to Work for a Large Employer, in 20 Charts.” Wall Street Journal, 2017, www.wsj.com/graphics/big-companies-get-bigger/.
+Pateman, Carole. Participation and Democratic Theory. Cambridge, Cambridge University Press, 1970, pp. 45–66.
+https://www2.census.gov/programs-surveys/cps/techdocs/cpsnov20.pdf
+https://www.bls.gov/bdm/nonprofits/nonprofits.htm
+https://www.census.gov/quickfacts/fact/table/US/PST045222
+https://www.bls.gov/emp/tables/employment-by-major-industry-sector.htm#2
