@@ -164,7 +164,7 @@ Learning about the work conditions favorable to democratic participation can inf
 
 Respondents to the Census Bureau's monthly Current Population Survey are asked to identify themselves as one of the six classes of workers, as well as report their voting history, household income, education level, location, and more. The most recent survey asked 126,097 respondents whether or not they voted in the 2022 national elections. To test my hypothesis, I compare the 2022 turnout rates of each class, controlling for potential confounders such as income and education level. My hypothesis will be supported if I discover that workers at for-profits turned out a lower rate than workers for the other classes in 2022. I use voter turnout as a measure of democratic participation on the whole because voting is the most basic and accessible form of participation, meaning it should capture workers of all degrees of commitment: the least committed participants will vote, and the most committed participants will vote *and* engage in other democratic activities such as attending rallies.
 
-This is a cross-sectional research design wherein I observe turnout estimates across multiple categorical groups at a single point in time, 2022. **The code that I used to prepare the data (import, wrangle, etc.) can be found at the bottom of the site.** 
+This is a cross-sectional research design wherein I observe turnout estimates across multiple categorical groups at a single point in time, 2022.
 
 First, I calculate the proportions of each group in the survey sample. 
 
