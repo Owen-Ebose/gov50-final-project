@@ -6,8 +6,9 @@ output:
   distill::distill_article:
     self_contained: false
 ---
+# Preparing data
 
-```{r, echo=FALSE}
+```{r}
 library(tidyverse)
 library(stringr)
 library(dplyr)
@@ -22,7 +23,7 @@ library(dplyr)
 census <- read_csv("census.csv")
 ```
 
-```{r, echo=FALSE}
+```{r}
 
 #preparing data
 #replacing coded values and creating new variables 
