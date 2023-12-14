@@ -298,8 +298,13 @@ In this project, I discovered that there is a statistically significant relation
 # Sources
 
 Francis, Theo. “Why Americans Are More Likely to Work for a Large Employer, in 20 Charts.” Wall Street Journal, 2017, www.wsj.com/graphics/big-companies-get-bigger/.
+
 Pateman, Carole. Participation and Democratic Theory. Cambridge, Cambridge University Press, 1970, pp. 45–66.
+
 https://www2.census.gov/programs-surveys/cps/techdocs/cpsnov20.pdf
+
 https://www.bls.gov/bdm/nonprofits/nonprofits.htm
+
 https://www.census.gov/quickfacts/fact/table/US/PST045222
+
 https://www.bls.gov/emp/tables/employment-by-major-industry-sector.htm#2
