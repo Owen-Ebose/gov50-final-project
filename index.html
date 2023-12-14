@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["census.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-10-1.png","index_files/figure-html5/unnamed-chunk-11-1.png","index_files/figure-html5/unnamed-chunk-13-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-4-2.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-5-2.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/figure-html5/unnamed-chunk-8-2.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.21/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["census.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-1-1.png","index_files/figure-html5/unnamed-chunk-1-2.png","index_files/figure-html5/unnamed-chunk-10-1.png","index_files/figure-html5/unnamed-chunk-11-1.png","index_files/figure-html5/unnamed-chunk-12-1.png","index_files/figure-html5/unnamed-chunk-13-1.png","index_files/figure-html5/unnamed-chunk-14-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-4-2.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-5-2.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/figure-html5/unnamed-chunk-8-1.png","index_files/figure-html5/unnamed-chunk-8-2.png","index_files/figure-html5/unnamed-chunk-9-1.png","index_files/figure-html5/unnamed-chunk-9-2.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.21/header-attrs.js","index_files/header-attrs-2.25/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1674,7 +1674,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
 <h1 id="section-3">Section 3</h1>
-<p>An initial visualization of 2022 turnout rates suggests a different in rates across classes. To explore this relationship, I conduct a regression analysis of turnout rates on employment class, controlling for a number of potential confounders.</p>
+<p>An initial visualization of 2022 turnout rates suggests a different in rates across classes. To explore this relationship, I conduct a regression analysis of turnout rates on employment class, controlling for a number of potential confounders. Those confounders are the respondent’s annual household income, whether or not they have a college degree, which state they live in, their sex, and their race. Each is associated with election turnout and could be associated with employment class (some classes of workers could receive higher incomes than other classes, and higher income is associated with higher turnout (the same goes for college education); some states feature more contested elections and hence higher voter turnout, and those states could be host to a higher proportion of a particular class of worker; there could be a higher proportion of one sex or race in a given class, and members of particular sexes and races turn out to vote at a higher rate).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://modelsummary.com'>modelsummary</a></span><span class='op'>)</span></span>
@@ -1700,7 +1700,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>  <span class='st'>"raceMixed"</span> <span class='op'>=</span> <span class='st'>"Race: Mixed"</span>,</span>
 <span>  <span class='st'>"raceAsian"</span> <span class='op'>=</span> <span class='st'>"Race: Asian"</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>lm1</span>, <span class='va'>lm2</span><span class='op'>)</span>,</span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>lm2</span>, <span class='va'>lm1</span><span class='op'>)</span>,</span>
 <span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, </span>
 <span>                                       <span class='st'>"r.squared"</span>, </span>
 <span>                                       <span class='st'>"adj.r.squared"</span><span class='op'>)</span>,</span>
@@ -1729,20 +1729,20 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 Federal gov’t
 </td>
 <td style="text-align:center;">
-0.071***
+0.131***
 </td>
 <td style="text-align:center;">
-0.131***
+0.071***
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.014
+s.e. = 0.015
 </td>
 <td style="text-align:center;">
-s.e. = 0.015
+s.e. = 0.014
 </td>
 </tr>
 <tr>
@@ -1760,10 +1760,10 @@ p = &lt;0.001
 Local gov’t
 </td>
 <td style="text-align:center;">
-0.131***
+0.180***
 </td>
 <td style="text-align:center;">
-0.180***
+0.131***
 </td>
 </tr>
 <tr>
@@ -1791,10 +1791,10 @@ p = &lt;0.001
 Non-profit
 </td>
 <td style="text-align:center;">
-0.082***
+0.144***
 </td>
 <td style="text-align:center;">
-0.144***
+0.082***
 </td>
 </tr>
 <tr>
@@ -1822,10 +1822,10 @@ p = &lt;0.001
 Self-employed
 </td>
 <td style="text-align:center;">
-0.123***
+0.146***
 </td>
 <td style="text-align:center;">
-0.146***
+0.123***
 </td>
 </tr>
 <tr>
@@ -1853,10 +1853,10 @@ p = &lt;0.001
 State gov’t
 </td>
 <td style="text-align:center;">
-0.120***
+0.174***
 </td>
 <td style="text-align:center;">
-0.174***
+0.120***
 </td>
 </tr>
 <tr>
@@ -1884,27 +1884,27 @@ p = &lt;0.001
 Annual household income
 </td>
 <td style="text-align:center;">
-0.000***
 </td>
 <td style="text-align:center;">
+0.000***
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+</td>
+<td style="text-align:center;">
 </td>
 <td style="text-align:center;">
 s.e. = 0.000
 </td>
-<td style="text-align:center;">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = &lt;0.001
 </td>
 <td style="text-align:center;">
+p = &lt;0.001
 </td>
 </tr>
 <tr>
@@ -1912,27 +1912,27 @@ p = &lt;0.001
 College degree
 </td>
 <td style="text-align:center;">
-0.178***
 </td>
 <td style="text-align:center;">
+0.178***
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+</td>
+<td style="text-align:center;">
 </td>
 <td style="text-align:center;">
 s.e. = 0.005
 </td>
-<td style="text-align:center;">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = &lt;0.001
 </td>
 <td style="text-align:center;">
+p = &lt;0.001
 </td>
 </tr>
 <tr>
@@ -1940,27 +1940,27 @@ p = &lt;0.001
 Race: Hawaiian/Pacific Islander
 </td>
 <td style="text-align:center;">
--0.063
 </td>
 <td style="text-align:center;">
+-0.063
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+</td>
+<td style="text-align:center;">
 </td>
 <td style="text-align:center;">
 s.e. = 0.043
 </td>
-<td style="text-align:center;">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.139
 </td>
 <td style="text-align:center;">
+p = 0.139
 </td>
 </tr>
 <tr>
@@ -1968,27 +1968,27 @@ p = 0.139
 Race: White
 </td>
 <td style="text-align:center;">
-0.081***
 </td>
 <td style="text-align:center;">
+0.081***
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+</td>
+<td style="text-align:center;">
 </td>
 <td style="text-align:center;">
 s.e. = 0.023
 </td>
-<td style="text-align:center;">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = &lt;0.001
 </td>
 <td style="text-align:center;">
+p = &lt;0.001
 </td>
 </tr>
 <tr>
@@ -1996,27 +1996,27 @@ p = &lt;0.001
 Race: Black
 </td>
 <td style="text-align:center;">
-0.082***
 </td>
 <td style="text-align:center;">
+0.082***
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+</td>
+<td style="text-align:center;">
 </td>
 <td style="text-align:center;">
 s.e. = 0.025
 </td>
-<td style="text-align:center;">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = &lt;0.001
 </td>
 <td style="text-align:center;">
+p = &lt;0.001
 </td>
 </tr>
 <tr>
@@ -2024,27 +2024,27 @@ p = &lt;0.001
 Race: Mixed
 </td>
 <td style="text-align:center;">
-0.009
 </td>
 <td style="text-align:center;">
+0.009
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+</td>
+<td style="text-align:center;">
 </td>
 <td style="text-align:center;">
 s.e. = 0.029
 </td>
-<td style="text-align:center;">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-p = 0.765
 </td>
 <td style="text-align:center;">
+p = 0.765
 </td>
 </tr>
 <tr>
@@ -2052,27 +2052,27 @@ p = 0.765
 Race: Asian
 </td>
 <td style="text-align:center;">
--0.091***
 </td>
 <td style="text-align:center;">
+-0.091***
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-s.e. = 0.026
 </td>
 <td style="text-align:center;">
+s.e. = 0.026
 </td>
 </tr>
 <tr>
 <td style="text-align:left;box-shadow: 0px 1.5px">
 </td>
 <td style="text-align:center;box-shadow: 0px 1.5px">
-p = &lt;0.001
 </td>
 <td style="text-align:center;box-shadow: 0px 1.5px">
+p = &lt;0.001
 </td>
 </tr>
 <tr>
@@ -2091,10 +2091,10 @@ Num.Obs.
 R2
 </td>
 <td style="text-align:center;">
-0.119
+0.024
 </td>
 <td style="text-align:center;">
-0.024
+0.119
 </td>
 </tr>
 <tr>
@@ -2102,10 +2102,10 @@ R2
 R2 Adj.
 </td>
 <td style="text-align:center;">
-0.117
+0.023
 </td>
 <td style="text-align:center;">
-0.023
+0.117
 </td>
 </tr>
 </tbody>
@@ -2123,6 +2123,31 @@ R2 Adj.
 </tfoot>
 </table>
 </div>
+<p>Model 1 does not control for confounders. Model 2 does. Both models suggest a clear and statistically significant relationship between turnout and employment class, although the estimated effect is attenuated when controlling for confounders. The baseline group is for-profit employees. Thus, the coefficients for each class represent the difference in turnouts between that class and for-profit employees. Controlling for confounders, federal government employees turned out at a rate 7.1 percentage points higher than for-profit employees in 2022; state government employees turned out at a rate 12 percentage points higher; local government employees turned out a rate 13.1 percentage points higher; workers for non-profits turned out at a rate 8.2 percentage points higher; and the self-employed turned out at a rate 12.3 percentage points higher. The p-value for each coefficient is below 0.001, meaning there is less than a 0.1% chance that the coefficients would be observed under a null hypothesis that there is no difference in turnout rates between the classes. Thus, we can reject the null, and consider the results statistically significant.</p>
+<p>I now visualize the coefficients with 95% confidence intervals.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>lm1tidy</span> <span class='op'>&lt;-</span> <span class='va'>lm1</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span>conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>lm1tidy</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"(Intercept)"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state2"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state3"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state4"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state5"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state6"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state7"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state8"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state9"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state10"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state11"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state12"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state13"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state14"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state15"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state16"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state17"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state18"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state19"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state20"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state21"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state22"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state23"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state24"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state25"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state26"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state27"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state28"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state29"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state30"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state31"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state32"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state33"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state34"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state35"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state36"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state37"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state38"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state39"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state40"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state41"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state42"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state43"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state44"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state45"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state46"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state47"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state48"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state49"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state50"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state51"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state52"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state53"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state54"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state55"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state56"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceAsian"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceBlack"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceWhite"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceHawaiian/Pacific Islander"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceMixed"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"college_degree"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"house_income_num"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"sexmale"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>mutate</span><span class='op'>(</span>term <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span><span class='va'>estimate</span>, <span class='va'>term</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_point</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_errorbarh</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>xmin <span class='op'>=</span> <span class='va'>conf.low</span>, xmax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_vline</span><span class='op'>(</span>xintercept <span class='op'>=</span> <span class='fl'>0</span>, lty <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span></span>
+<span>    x <span class='op'>=</span> <span class='st'>"Estimates"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"Est. effect of employment class on voter turnout (with 95% intervals)"</span></span>
+<span>  <span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
+</div>
+<p>Working for a local government is associated with the greatest increase in turnout, followed by being self-employed, working for a state government, working for a non-profit, then working for the federal government. None of the 95% confidence intervals contain zero, so, in line with our conclusion based on the p-values, we can conclude that the coefficients are significantly different from zero at the five percent level.</p>
 <h1 id="exploratory-data-analysis">Exploratory data analysis</h1>
 <p>First, where do most Americans work? Which class is the largest? I calculate the proportions of each class in the sample.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2306,7 +2331,7 @@ State gov’t
 </table>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="index_files/figure-html5/unnamed-chunk-8-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-8-2.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-9-1.png" width="624" /><img src="index_files/figure-html5/unnamed-chunk-9-2.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <table>
@@ -2422,7 +2447,7 @@ Below 15,000
 </tr>
 </tbody>
 </table>
-<p><img src="index_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
 </div>
 <p>It seems as though income is related to turnout: the highest income groups turnout the most, and the lowest income groups turnout the least.</p>
 <p>In light of the likely relationship between income and turnout, I run a regression analysis to assess the relationship between employment type and turnout holding income constant.</p>
@@ -2596,7 +2621,7 @@ R2 Adj.
 </div>
 <p>I further illustrate the effect of employment type on turnout holding income constant by calculating and visualizing the turnout rates of each type within income groups.</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="index_files/figure-html5/unnamed-chunk-13-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-14-1.png" width="624" /></p>
 </div>
 <p>Within each income group, workers at non-companies turnout more than workers at companies.</p>
 <h1 id="code">Code</h1>
@@ -2790,7 +2815,7 @@ R2 Adj.
 <span>  <span class='st'>"raceMixed"</span> <span class='op'>=</span> <span class='st'>"Race: Mixed"</span>,</span>
 <span>  <span class='st'>"raceAsian"</span> <span class='op'>=</span> <span class='st'>"Race: Asian"</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>lm1</span>, <span class='va'>lm2</span><span class='op'>)</span>,</span>
+<span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>lm2</span>, <span class='va'>lm1</span><span class='op'>)</span>,</span>
 <span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, </span>
 <span>                                       <span class='st'>"r.squared"</span>, </span>
 <span>                                       <span class='st'>"adj.r.squared"</span><span class='op'>)</span>,</span>
@@ -2799,6 +2824,24 @@ R2 Adj.
 <span>                           coef_map <span class='op'>=</span> <span class='va'>var_labels</span>,</span>
 <span>                           note <span class='op'>=</span> <span class='st'>"State covariate included in analysis but omitted from table"</span>,</span>
 <span>                           stars <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://broom.tidymodels.org/'>broom</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>lm1tidy</span> <span class='op'>&lt;-</span> <span class='va'>lm1</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://generics.r-lib.org/reference/tidy.html'>tidy</a></span><span class='op'>(</span>conf.int <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>lm1tidy</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"(Intercept)"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state2"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state3"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state4"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state5"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state6"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state7"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state8"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state9"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state10"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state11"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state12"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state13"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state14"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state15"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state16"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state17"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state18"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state19"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state20"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state21"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state22"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state23"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state24"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state25"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state26"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state27"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state28"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state29"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state30"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state31"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state32"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state33"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state34"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state35"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state36"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state37"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state38"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state39"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state40"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state41"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state42"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state43"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state44"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state45"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state46"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state47"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state48"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state49"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state50"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state51"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state52"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state53"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state54"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state55"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"state56"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceAsian"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceBlack"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceWhite"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceHawaiian/Pacific Islander"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"raceMixed"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"college_degree"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"house_income_num"</span>, <span class='va'>term</span> <span class='op'>!=</span> <span class='st'>"sexmale"</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>term <span class='op'>=</span> <span class='fu'><a href='https://forcats.tidyverse.org/reference/fct_reorder.html'>fct_reorder</a></span><span class='op'>(</span><span class='va'>term</span>, <span class='va'>estimate</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span><span class='va'>estimate</span>, <span class='va'>term</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_errorbarh.html'>geom_errorbarh</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>xmin <span class='op'>=</span> <span class='va'>conf.low</span>, xmax <span class='op'>=</span> <span class='va'>conf.high</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span><span class='op'>(</span>xintercept <span class='op'>=</span> <span class='fl'>0</span>, lty <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    x <span class='op'>=</span> <span class='st'>"Estimates"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"Est. effect of employment class on voter turnout (with 95% intervals)"</span></span>
+<span>  <span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>census</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>employment_class</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>

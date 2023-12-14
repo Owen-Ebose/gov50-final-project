@@ -205,8 +205,7 @@ employment_class_turnout_plot
 
 # Section 3
 
-An initial visualization of 2022 turnout rates suggests a different in rates across classes. To explore this relationship, I conduct a regression analysis of turnout rates on employment class, controlling for a number of potential confounders. 
-
+An initial visualization of 2022 turnout rates suggests a different in rates across classes. To explore this relationship, I conduct a regression analysis of turnout rates on employment class, controlling for a number of potential confounders. Those confounders are the respondent's annual household income, whether or not they have a college degree, which state they live in, their sex, and their race. Each is associated with election turnout and could be associated with employment class (some classes of workers could receive higher incomes than  other classes, and higher income is associated with higher turnout (the same goes for college education); some states feature more contested elections and hence higher voter turnout, and those states could be host to a higher proportion of a particular class of worker; there could be a higher proportion of one sex or race in a given class, and members of particular sexes and races turn out to vote at a higher rate). 
 
 ```{r}
 library(modelsummary)
@@ -232,7 +231,7 @@ var_labels <- c(
   "raceMixed" = "Race: Mixed",
   "raceAsian" = "Race: Asian")
 
-modelsummary::modelsummary(list(lm1, lm2),
+modelsummary::modelsummary(list(lm2, lm1),
                            gof_map = c("nobs", 
                                        "r.squared", 
                                        "adj.r.squared"),
@@ -244,7 +243,32 @@ modelsummary::modelsummary(list(lm1, lm2),
 
 ```
 
+Model 1 does not control for confounders. Model 2 does. Both models suggest a clear and statistically significant relationship between turnout and employment class, although the estimated effect is attenuated when controlling for confounders. The baseline group is for-profit employees. Thus, the coefficients for each class represent the difference in turnouts between that class and for-profit employees. Controlling for confounders, federal government employees turned out at a rate 7.1 percentage points higher than for-profit employees in 2022; state government employees turned out at a rate 12 percentage points higher; local government employees turned out a rate 13.1 percentage points higher; workers for non-profits turned out at a rate 8.2 percentage points higher; and the self-employed turned out at a rate 12.3 percentage points higher. The p-value for each  coefficient is below 0.001, meaning there is less than a 0.1% chance that the coefficients would be observed under a null hypothesis that there is no difference in turnout rates between the classes. Thus, we can reject the null, and consider the results statistically significant. 
 
+I now visualize the coefficients with 95% confidence intervals. 
+
+```{r}
+library(broom)
+
+lm1tidy <- lm1 |>
+  tidy(conf.int = TRUE)
+
+lm1tidy |>
+  filter(term != "(Intercept)", term != "state2", term != "state3", term != "state4", term != "state5", term != "state6", term != "state7", term != "state8", term != "state9", term != "state10", term != "state11", term != "state12", term != "state13", term != "state14", term != "state15", term != "state16", term != "state17", term != "state18", term != "state19", term != "state20", term != "state21", term != "state22", term != "state23", term != "state24", term != "state25", term != "state26", term != "state27", term != "state28", term != "state29", term != "state30", term != "state31", term != "state32", term != "state33", term != "state34", term != "state35", term != "state36", term != "state37", term != "state38", term != "state39", term != "state40", term != "state41", term != "state42", term != "state43", term != "state44", term != "state45", term != "state46", term != "state47", term != "state48", term != "state49", term != "state50", term != "state51", term != "state52", term != "state53", term != "state54", term != "state55", term != "state56", term != "raceAsian", term != "raceBlack", term != "raceWhite", term != "raceHawaiian/Pacific Islander", term != "raceMixed", term != "college_degree", term != "house_income_num", term != "sexmale") |>
+  mutate(term = fct_reorder(term, estimate)) |>
+  ggplot(aes(estimate, term)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high)) +
+  geom_vline(xintercept = 0, lty = 2) +
+  labs(
+    x = "Estimates",
+    y = NULL,
+    title = "Est. effect of employment class on voter turnout (with 95% intervals)"
+  )
+
+```
+
+Working for a local government is associated with the greatest increase in turnout, followed by being self-employed, working for a state government, working for a non-profit, then working for the federal government. None of the 95% confidence intervals contain zero, so, in line with our conclusion based on the p-values, we can conclude that the coefficients are significantly different from zero at the five percent level.
 
 
 
